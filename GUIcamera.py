@@ -29,16 +29,16 @@ class Example(Frame):
         frame1 = Frame(self)
         frame1.pack(fill=X)
             
-        lbl_date1 = Label(frame1, text="Start").grid(row=0, column=0)
-        date1 = Entry(frame1)
-        date1.grid(row=0, column=1)
+        lbl_date1 = Label(frame1, text="Start").grid(row=0, column=0, pady=5, padx=5)
+        date1 = Entry(frame1, width=10)
+        date1.grid(row=0, column=1, padx=2.5)
 
-        lbl_date2 = Label(frame1, text="End").grid(row=0, column=2)
-        date2 = Entry(frame1)
-        date2.grid(row=0, column=3)
+        lbl_date2 = Label(frame1, text="End").grid(row=0, column=2, padx=5)
+        date2 = Entry(frame1, width=10)
+        date2.grid(row=0, column=3, padx=2.5)
 
         settings = Button(frame1, text="Settings")
-        settings.grid(row=0, column=4)
+        settings.grid(row=0, column=4, padx=50)
         
 
         
@@ -48,7 +48,7 @@ class Example(Frame):
 def main():
   
     root = Tk()
-    root.geometry("500x200+300+50")
+    root.geometry("400x200+300+50")
     app = Example()
     root.mainloop()  
 
