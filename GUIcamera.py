@@ -38,7 +38,7 @@ class Example(Frame):
         date2 = Entry(frame1, width=10)
         date2.grid(row=0, column=3, padx=2.5)
 
-        settings = Button(frame1, text="Settings")
+        settings = Button(frame1, text="Settings", command=self.create_window)
         settings.grid(row=0, column=4, padx=50)
         
 
@@ -50,7 +50,12 @@ class Example(Frame):
         
 
         
-        
+    def create_window(self):
+        #self.counter += 1
+        newWindow = Toplevel(self)
+
+                
+        	      
 
         
         
