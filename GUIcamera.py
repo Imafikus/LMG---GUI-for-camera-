@@ -5,6 +5,7 @@ from tkinter import Tk, RIGHT, BOTH, RAISED
 from tkinter.ttk import Button, Style
 from tkinter import messagebox
 from tkinter import Toplevel
+from tkinter import *
 
 from PIL import ImageTk, Image
 
@@ -41,6 +42,16 @@ class Example(Frame):
         settings.grid(row=0, column=4, padx=50)
         
 
+        frame2 = Frame(self)
+        frame2.pack(fill=X)
+        calculate = Button(frame2, text = "Calculate")
+        calculate.pack(pady = 30)
+        calculate.config(height=15, width = 30)
+        
+
+        
+        
+
         
         
 
@@ -48,7 +59,7 @@ class Example(Frame):
 def main():
   
     root = Tk()
-    root.geometry("400x200+300+50")
+    root.geometry("400x150+300+50")
     app = Example()
     root.mainloop()  
 
