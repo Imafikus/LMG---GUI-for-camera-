@@ -51,8 +51,24 @@ class Example(Frame):
 
         
     def create_window(self):
-        #self.counter += 1
         newWindow = Toplevel(self)
+
+        
+
+        newWindow.title("Settings")
+        lblCVP = Label(newWindow, text="CVP").grid(row=0, column=0, padx=5)
+        entryCVP1 = Entry(newWindow, width=10).grid(row=0, column=1, padx=5)
+        entryCVP2 = Entry(newWindow, width=10).grid(row=0, column=2, padx=5)
+
+        lblFOV = Label(newWindow, text="FOV").grid(row=1, column=0, padx=5, pady=5)
+        entryFOV1 = Entry(newWindow, width=10).grid(row=1, column=1, padx=5, pady=5)
+        entryFOV2 = Entry(newWindow, width=10).grid(row=1, column=2, padx=5, pady=5)
+        newWindow.geometry("400x400+200+200")
+
+        lblDIR = Label(newWindow, text="DIR").grid(row=2, column=0, padx=5)
+        entryDIR1 = Entry(newWindow, width=10).grid(row=2, column=1, padx=5)
+        entryDIR2 = Entry(newWindow, width=10).grid(row=2, column=2, padx=5)
+        newWindow.geometry("250x200+200+200")
 
                 
         	      
