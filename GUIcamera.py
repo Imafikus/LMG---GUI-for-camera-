@@ -31,28 +31,48 @@ class Example(Frame):
         frame0 = Frame(self)
         frame0.pack(fill=X, padx=15)
         
-        
+        labelDay1 = Label(frame0, text = "Date 1").grid(row=0, column=0, padx=10)        
 
         varDay1 = StringVar(frame0)
         varDay1.set("1")
         optionDay1 = OptionMenu(frame0, varDay1, "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", "11.", "12.", "13.", "14.", "15.", "16.", "17.", "18.", "19.", "20.", "21.", "22.", "23.", "24.", "25.","26.", "27.", "28.", "29.", "30.", "31.")
-        optionDay1.grid(row=0, column=0)
+        optionDay1.grid(row=0, column=1)
         
 
         varMonth1 = StringVar(frame0)
         varMonth1.set("1.")
         optionMonth1 = OptionMenu(frame0, varMonth1, "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", "11.", "12.")
-        optionMonth1.grid(row=0, column=1)
+        optionMonth1.grid(row=0, column=2)
 
         
         varYear1 = StringVar(frame0)
         varYear1.set("2010.")
         optionYear1 = OptionMenu(frame0, varYear1, "2010.","2011.","2012.","2013.","2014.","2015.","2016.","2017.","2018.","2019.","2020.",
 "2021.","2022.","2023.","2024.","2025.","2026.","2027.","2028.","2029.","2030.")      
-        optionYear1.grid(row=0, column=2)
+        optionYear1.grid(row=0, column=3)
+
+        lblSpace = Label(frame0, text="").grid(row=0, column=3, padx=25) 
+        lblDate2 = Label(frame0, text="Date 2").grid(row=0, column=4, padx=10) 
+        varDay2 = StringVar(frame0)
+        varDay2.set("1")
+        optionDay2 = OptionMenu(frame0, varDay2, "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", "11.", "12.", "13.", "14.", "15.", "16.", "17.", "18.", "19.", "20.", "21.", "22.", "23.", "24.", "25.","26.", "27.", "28.", "29.", "30.", "31.")
+        optionDay2.grid(row=0, column=5)
+        
+
+        varMonth2 = StringVar(frame0)
+        varMonth2.set("1.")
+        optionMonth2 = OptionMenu(frame0, varMonth2, "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", "11.", "12.")
+        optionMonth2.grid(row=0, column=6)
+
+        
+        varYear2 = StringVar(frame0)
+        varYear2.set("2010.")
+        optionYear2 = OptionMenu(frame0, varYear2, "2010.","2011.","2012.","2013.","2014.","2015.","2016.","2017.","2018.","2019.","2020.",
+"2021.","2022.","2023.","2024.","2025.","2026.","2027.","2028.","2029.","2030.")      
+        optionYear2.grid(row=0, column=7)
               
         settings = Button(frame0, text="Settings", command=self.create_window)
-        settings.grid(row=0, column=3, padx=50)
+        settings.grid(row=0, column=8, padx=50)
         
 	
 
@@ -94,7 +114,7 @@ class Example(Frame):
 def main():
   
     root = Tk()
-    root.geometry("400x150+300+50")
+    root.geometry("700x150+300+50")
     app = Example()
     root.mainloop()  
 
