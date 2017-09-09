@@ -52,7 +52,7 @@ class Example(Frame):
         optionYear1.grid(row=0, column=3)
 
         lblSpace = Label(frame0, text="").grid(row=0, column=3, padx=25) 
-        lblDate2 = Label(frame0, text="Date 2").grid(row=0, column=4, padx=10) 
+        lblDate2 = Label(frame0, text="Date 2").grid(row=0, column=4, padx=15) 
         varDay2 = StringVar(frame0)
         varDay2.set("1")
         optionDay2 = OptionMenu(frame0, varDay2, "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", "11.", "12.", "13.", "14.", "15.", "16.", "17.", "18.", "19.", "20.", "21.", "22.", "23.", "24.", "25.","26.", "27.", "28.", "29.", "30.", "31.")
@@ -99,11 +99,10 @@ class Example(Frame):
         entryFOV2 = Entry(newWindow, width=10).grid(row=1, column=2, padx=5, pady=5)
         newWindow.geometry("400x400+200+200")
 
-        lblDIR = Label(newWindow, text="DIR").grid(row=2, column=0, padx=5)
-        entryDIR1 = Entry(newWindow, width=10).grid(row=2, column=1, padx=5)
-        entryDIR2 = Entry(newWindow, width=10).grid(row=2, column=2, padx=5)
+        """browse = Button(newWindow, text = "Browse...")
+	browse.grid =
         newWindow.geometry("250x200+200+200")
-
+	"""
                 
         	      
 
