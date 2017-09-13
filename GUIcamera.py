@@ -1,5 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QDesktopWidget
+
 from PyQt5.QtGui import QIcon
 
 
@@ -15,7 +16,8 @@ class Example(QWidget):
         
         self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('Icon')
-        self.setWindowIcon(QIcon('PMG.png'))        
+        self.setWindowIcon(QIcon('PMG.png'))      
+        self.center()  
     
         self.show()
 
@@ -30,7 +32,13 @@ class Example(QWidget):
             event.accept()
         else:
             event.ignore()
-        """       
+    """     
+    def center(self):
+        
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
         
         
 if __name__ == '__main__':
