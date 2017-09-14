@@ -1,10 +1,10 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QDesktopWidget
+from PyQt5.QtWidgets import *#QApplication, QWidget, QMessageBox, qApp, QDesktopWidget, QMainWindow, QAction
 
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import *#QIcon
 
 
-class Example(QWidget):
+class Example(QMainWindow):
     
     def __init__(self):
         super().__init__()
@@ -13,13 +13,26 @@ class Example(QWidget):
         
         
     def initUI(self):
+
+
+
+        FOWAct = QAction(QIcon('PMG.png'), 'FOW', self)
+        FOWAct.setShortcut('Ctrl+F')
+        FOWAct.triggered.connect(self.do_thingy)
+                
+
+        self.toolbar = self.addToolBar('FOW')
+        self.toolbar.addAction(FOWAct)
         
         self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('Icon')
-        self.setWindowIcon(QIcon('PMG.png'))      
+        self.setWindowIcon(QIcon("PMG.png")) 
         self.center()  
     
         self.show()
+
+    def do_thingy(self):
+        print("BrmBrm")
 
     """
         def closeEvent(self, event):
