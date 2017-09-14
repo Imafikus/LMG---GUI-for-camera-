@@ -96,13 +96,22 @@ class MainWindow(QMainWindow):
         self.toolbar = self.addToolBar('Save')
         self.toolbar.addAction(SaveAct)
 
- 
-
-        self.setGeometry(300, 300, 300, 220)
+        self.width = 300
+        self.height = 300
+        
+        self.setGeometry(300, 300, self.width, self.height)
         self.setFixedSize(self.size())
         self.setWindowTitle('PMG camera')
         self.setWindowIcon(QIcon("fov.png")) 
         self.center()  
+
+        calc = QPushButton('Calculate', self)
+        calc.resize(150, 50)
+        calc.move(75, 200)
+        
+
+
+        
     
         self.show()
         
