@@ -16,23 +16,49 @@ class Example(QMainWindow):
 
 
 
-        FOWAct = QAction(QIcon('PMG.png'), 'FOW', self)
-        FOWAct.setShortcut('Ctrl+F')
-        FOWAct.triggered.connect(self.do_thingy)
+        FOVAct = QAction(QIcon('icons/fov.png'), 'FOV', self)
+        FOVAct.setShortcut('Ctrl+F')
+        FOVAct.triggered.connect(self.do_thingy)
+
+        CVPAct = QAction(QIcon('icons/cvp.png'), 'CVP', self)
+        CVPAct.setShortcut('Ctrl+P')
+        CVPAct.triggered.connect(self.do_thingy)
+
+        BrowseAct = QAction(QIcon('icons/browse.png'), 'Browse', self)
+        BrowseAct.setShortcut('Ctrl+B')
+        BrowseAct.triggered.connect(self.do_thingy)
+
+        SaveAct = QAction(QIcon('icons/save.png'), 'Browse', self)
+        SaveAct.setShortcut('Ctrl+B')
+        SaveAct.triggered.connect(self.do_thingy)
                 
 
-        self.toolbar = self.addToolBar('FOW')
-        self.toolbar.addAction(FOWAct)
+                
+
+        self.toolbar = self.addToolBar('FOV')
+        self.toolbar.addAction(FOVAct)
+
+        self.toolbar = self.addToolBar('CVP')
+        self.toolbar.addAction(CVPAct)
+
+        self.toolbar = self.addToolBar('Browse')
+        self.toolbar.addAction(BrowseAct)
+
+        self.toolbar = self.addToolBar('Save')
+        self.toolbar.addAction(SaveAct)
+
         
         self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('Icon')
-        self.setWindowIcon(QIcon("PMG.png")) 
+        self.setWindowIcon(QIcon("fov.png")) 
         self.center()  
     
         self.show()
-
+    
     def do_thingy(self):
-        print("BrmBrm")
+        print("print")
+
+    
 
     """
         def closeEvent(self, event):
