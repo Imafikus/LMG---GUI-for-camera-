@@ -99,7 +99,8 @@ class MainWindow(QMainWindow):
  
 
         self.setGeometry(300, 300, 300, 220)
-        self.setWindowTitle('Icon')
+        self.setFixedSize(self.size())
+        self.setWindowTitle('PMG camera')
         self.setWindowIcon(QIcon("fov.png")) 
         self.center()  
     
