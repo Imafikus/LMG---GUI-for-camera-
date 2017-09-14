@@ -1,13 +1,64 @@
 import sys
 from PyQt5.QtWidgets import *#QApplication, QWidget, QMessageBox, qApp, QDesktopWidget, QMainWindow, QAction
 
-from PyQt5.QtGui import *#QIcon
+from PyQt5.QtGui import QIcon
 
 
-class Example(QMainWindow):
+
+class FOVWindow(QWidget):
     
     def __init__(self):
         super().__init__()
+        
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, 300, 220)
+        self.setWindowTitle('FOV')
+        self.setWindowIcon(QIcon("fov.png")) 
+
+class CVPWindow(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, 300, 220)
+        self.setWindowTitle('CVP')
+        self.setWindowIcon(QIcon("fov.png")) 
+
+class BrowseWindow(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, 300, 220)
+        self.setWindowTitle('Browse')
+        self.setWindowIcon(QIcon("fov.png")) 
+
+class SaveWindow(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, 300, 220)
+        self.setWindowTitle('Save')
+        self.setWindowIcon(QIcon("fov.png")) 
+        
+
+        
+class MainWindow(QMainWindow):
+    
+    def __init__(self):
+        super(MainWindow, self).__init__()
         
         self.initUI()
         
@@ -18,21 +69,19 @@ class Example(QMainWindow):
 
         FOVAct = QAction(QIcon('icons/fov.png'), 'FOV', self)
         FOVAct.setShortcut('Ctrl+F')
-        FOVAct.triggered.connect(self.do_thingy)
+        FOVAct.triggered.connect(self.fov)
 
         CVPAct = QAction(QIcon('icons/cvp.png'), 'CVP', self)
         CVPAct.setShortcut('Ctrl+P')
-        CVPAct.triggered.connect(self.do_thingy)
+        CVPAct.triggered.connect(self.cvp)
 
         BrowseAct = QAction(QIcon('icons/browse.png'), 'Browse', self)
         BrowseAct.setShortcut('Ctrl+B')
-        BrowseAct.triggered.connect(self.do_thingy)
+        BrowseAct.triggered.connect(self.browse)
 
-        SaveAct = QAction(QIcon('icons/save.png'), 'Browse', self)
-        SaveAct.setShortcut('Ctrl+B')
-        SaveAct.triggered.connect(self.do_thingy)
-                
-
+        SaveAct = QAction(QIcon('icons/save.png'), 'Save', self)
+        SaveAct.setShortcut('Ctrl+S')
+        SaveAct.triggered.connect(self.save)
                 
 
         self.toolbar = self.addToolBar('FOV')
@@ -47,16 +96,31 @@ class Example(QMainWindow):
         self.toolbar = self.addToolBar('Save')
         self.toolbar.addAction(SaveAct)
 
-        
+ 
+
         self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('Icon')
         self.setWindowIcon(QIcon("fov.png")) 
         self.center()  
     
         self.show()
-    
-    def do_thingy(self):
-        print("print")
+        
+        
+    def fov(self):
+        self.FOV = FOVWindow()
+        self.FOV.show()
+
+    def cvp(self):
+        self.CVP = CVPWindow()
+        self.CVP.show()
+
+    def browse(self):
+        self.B = BrowseWindow()
+        self.B.show()
+
+    def save(self):
+        self.S = SaveWindow()
+        self.S.show()
 
     
 
@@ -83,5 +147,5 @@ class Example(QMainWindow):
 if __name__ == '__main__':
     
     app = QApplication(sys.argv)
-    ex = Example()
+    ex = MainWindow()
     sys.exit(app.exec_())
