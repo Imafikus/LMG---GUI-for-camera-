@@ -1,7 +1,7 @@
 import sys
-from PyQt5.QtWidgets import *#QApplication, QWidget, QMessageBox, qApp, QDesktopWidget, QMainWindow, QAction
-
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 
 
 
@@ -15,6 +15,9 @@ class FOVWindow(QWidget):
     def initUI(self):
         self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('FOV')
+        self.lbl1 = QLabel("Test", self)
+        self.lbl1.move(50, 40)
+        
         self.setWindowIcon(QIcon("fov.png")) 
 
 class CVPWindow(QWidget):
@@ -27,6 +30,8 @@ class CVPWindow(QWidget):
     def initUI(self):
         self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('CVP')
+        
+        
         self.setWindowIcon(QIcon("fov.png")) 
 
 class BrowseWindow(QWidget):
