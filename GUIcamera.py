@@ -98,7 +98,7 @@ class MainWindow(QMainWindow):
 
         #window init
         self.width = 340
-        self.height = 300        
+        self.height = 350        
         self.setGeometry(300, 300, self.width, self.height)
         self.setFixedSize(self.size())
         self.setWindowTitle('PMG camera')
@@ -120,11 +120,11 @@ class MainWindow(QMainWindow):
         m1.resize(50, 30)        
         m1.move(70, 70)
 
-        m1 = QComboBox(self)
+        y1 = QComboBox(self)
         for year in range (2000, 2051):      
-                m1.addItem(str(year)+".")
-        m1.resize(70, 30)        
-        m1.move(120, 70)
+                y1.addItem(str(year)+".")
+        y1.resize(70, 30)        
+        y1.move(120, 70)
 
         hour1 = QLineEdit(self)
         hour1.move(250, 70)
@@ -134,10 +134,41 @@ class MainWindow(QMainWindow):
         min1.move(290, 70)
         min1.resize(30,30)
         
+        #date 2 input init
+        move_down = 80
+
+        d2 = QComboBox(self)
+        for day in range (1, 32):      
+                d2.addItem(str(day)+".")
+        d2.resize(50, 30)        
+        d2.move(20, 70+move_down)
+
+        m2 = QComboBox(self)
+        for month in range (1, 13):      
+                m2.addItem(str(month)+".")
+        m2.resize(50, 30)        
+        m2.move(70, 70+move_down)
+
+        y2 = QComboBox(self)
+        for year in range (2000, 2051):      
+                y2.addItem(str(year)+".")
+        y2.resize(70, 30)        
+        y2.move(120, 70+move_down)
+
+        hour2 = QLineEdit(self)
+        hour2.resize(30,30)
+        hour2.move(250, 70+move_down)
+        
+        min2 = QLineEdit(self)
+        min2.resize(30,30)
+        min2.move(290, 70+move_down)
+        
+        
         #Button init
         calc = QPushButton('Calculate', self)
         calc.resize(150, 50)
         calc.move(95, self.height-100)
+        calc.clicked.connect(self.calculateButton)
         
 
 
@@ -161,6 +192,9 @@ class MainWindow(QMainWindow):
     def save(self):
         self.S = SaveWindow()
         self.S.show()
+
+    def calculateButton(self):
+        print("Banjo")
 
     
 
