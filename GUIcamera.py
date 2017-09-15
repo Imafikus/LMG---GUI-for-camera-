@@ -65,8 +65,8 @@ class MainWindow(QMainWindow):
         
     def initUI(self):
 
-
-
+        
+        #toolbar init
         FOVAct = QAction(QIcon('icons/fov.png'), 'FOV', self)
         FOVAct.setShortcut('Ctrl+F')
         FOVAct.triggered.connect(self.fov)
@@ -83,7 +83,7 @@ class MainWindow(QMainWindow):
         SaveAct.setShortcut('Ctrl+S')
         SaveAct.triggered.connect(self.save)
                 
-
+        
         self.toolbar = self.addToolBar('FOV')
         self.toolbar.addAction(FOVAct)
 
@@ -96,18 +96,48 @@ class MainWindow(QMainWindow):
         self.toolbar = self.addToolBar('Save')
         self.toolbar.addAction(SaveAct)
 
-        self.width = 300
-        self.height = 300
-        
+        #window init
+        self.width = 340
+        self.height = 300        
         self.setGeometry(300, 300, self.width, self.height)
         self.setFixedSize(self.size())
         self.setWindowTitle('PMG camera')
         self.setWindowIcon(QIcon("fov.png")) 
         self.center()  
+        
 
+        #date1 input init
+
+        d1 = QComboBox(self)
+        for day in range (1, 32):      
+                d1.addItem(str(day)+".")
+        d1.resize(50, 30)        
+        d1.move(20, 70)
+
+        m1 = QComboBox(self)
+        for month in range (1, 13):      
+                m1.addItem(str(month)+".")
+        m1.resize(50, 30)        
+        m1.move(70, 70)
+
+        m1 = QComboBox(self)
+        for year in range (2000, 2051):      
+                m1.addItem(str(year)+".")
+        m1.resize(70, 30)        
+        m1.move(120, 70)
+
+        hour1 = QLineEdit(self)
+        hour1.move(250, 70)
+        hour1.resize(30,30)
+
+        min1 = QLineEdit(self)
+        min1.move(290, 70)
+        min1.resize(30,30)
+        
+        #Button init
         calc = QPushButton('Calculate', self)
         calc.resize(150, 50)
-        calc.move(75, 200)
+        calc.move(95, self.height-100)
         
 
 
