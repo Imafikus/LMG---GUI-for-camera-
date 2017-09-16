@@ -88,11 +88,30 @@ class BrowseWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 300, 220)
+        self.setGeometry(300, 300, 450, 200)
         self.setWindowTitle('Browse')
         self.setWindowIcon(QIcon("fov.png"))
         files = str(QFileDialog.getExistingDirectory())
-        print(files)
+        
+        self.lbl0 = QLabel("Current Path: "+ files, self)
+        self.lbl0.move(10, 40)
+        self.lbl1 = QLabel("Search again?", self)
+        self.lbl1.move(80, 100)
+
+        
+        self.yes = QPushButton('Yes', self)
+        self.yes.resize(150, 50)
+        self.yes.move(95, 100)
+        self.yes.clicked.connect(self.search)
+        
+        no = QPushButton('No', self)
+        no.resize(150, 50)
+        no.move(195, 100)
+        no.clicked.connect(self.search)
+    
+    def search(self):
+        print("Kurac")
+
                                               
 
 class SaveWindow(QWidget):
