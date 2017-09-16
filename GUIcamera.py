@@ -20,7 +20,10 @@ class FOVWindow(QWidget):
         self.lbl1 = QLabel("p1", self)
         self.lbl1.move(40, 10)
 
-        self.lbl2 = QLabel("p2", self)
+        self.lbl1 = QLabel("p2", self)
+        self.lbl1.move(110, 10)
+
+        self.lbl2 = QLabel("p3", self)
         self.lbl2.move(170, 10)
 
         
@@ -29,8 +32,13 @@ class FOVWindow(QWidget):
         p1.resize(45,30)
 
         p2 = QLineEdit(self)
-        p2.move(170, 30)
+        p2.move(100, 30)
         p2.resize(45,30)
+
+
+        p3 = QLineEdit(self)
+        p3.move(160, 30)
+        p3.resize(45,30)
 
         
         OK = QPushButton('OK', self)
@@ -91,18 +99,19 @@ class BrowseWindow(QWidget):
         self.setGeometry(300, 300, 450, 200)
         self.setWindowTitle('Browse')
         self.setWindowIcon(QIcon("fov.png"))
+        self.setFixedSize(self.size())
         files = str(QFileDialog.getExistingDirectory())
         
         self.lbl0 = QLabel("Current Path: "+ files, self)
         self.lbl0.move(10, 20)
-        self.lbl1 = QLabel("Search again?", self)
+        """self.lbl1 = QLabel("Search again?", self)
         self.lbl1.move(170, 80)
 
         
         self.yes = QPushButton('Yes', self)
         self.yes.resize(100, 35)
         self.yes.move(125, 120)
-      """  self.yes.clicked.connect(self.search#, files)
+        self.yes.clicked.connect(self.search#, files)
         
         no = QPushButton('No', self)
         no.resize(100, 35)
@@ -121,9 +130,15 @@ class SaveWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 300, 220)
+        self.setGeometry(300, 300, 450, 200)
         self.setWindowTitle('Save')
-        self.setWindowIcon(QIcon("fov.png")) 
+        self.setWindowIcon(QIcon("save.png")) 
+        self.setFixedSize(self.size())
+        files = str(QFileDialog.getExistingDirectory())
+        
+        self.lbl0 = QLabel("Save Path: "+ files, self)
+        self.lbl0.move(10, 20)
+       
         
 
         
