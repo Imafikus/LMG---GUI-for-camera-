@@ -26,20 +26,24 @@ class FOVWindow(QWidget):
         self.lbl2 = QLabel("p3", self)
         self.lbl2.move(170, 10)
 
+        f = open("config/fov.txt", "r")
+        values = f.readlines()
+        f.close()
         
-        p1 = QLineEdit(self)
-        p1.move(40, 30)
-        p1.resize(45,30)
+        self.p1 = QLineEdit(self)
+        self.p1.move(40, 30)
+        self.p1.resize(45,30)
+        self.p1.setText(values[0])
+        
+        self.p2 = QLineEdit(self)
+        self.p2.move(100, 30)
+        self.p2.resize(45,30)
+        self.p2.setText(values[1])
 
-        p2 = QLineEdit(self)
-        p2.move(100, 30)
-        p2.resize(45,30)
-
-
-        p3 = QLineEdit(self)
-        p3.move(160, 30)
-        p3.resize(45,30)
-
+        self.p3 = QLineEdit(self)
+        self.p3.move(160, 30)
+        self.p3.resize(45,30)
+        self.p3.setText(values[2])
         
         OK = QPushButton('OK', self)
         OK.resize(150, 50)
@@ -47,10 +51,16 @@ class FOVWindow(QWidget):
         OK.clicked.connect(self.okButton)
         
     def okButton(self):
-        print ("FOV")
-        self.close()
+        f = open("config/fov.txt", "w")
+        p1 = self.p1.text()
+        p2 = self.p2.text() 
+        p3 = self.p3.text()
         
-        self.setWindowIcon(QIcon("fov.png")) 
+        f.write(p1)
+        f.write(p2)
+        f.write(p3)
+        f.close() 
+        self.close()
 
 class CVPWindow(QWidget):
     
@@ -95,7 +105,7 @@ class CVPWindow(QWidget):
         
         f.write(p1)
         f.write(p2)
-        f.close
+        f.close()
         self.close()
 
 class BrowseWindow(QWidget):
