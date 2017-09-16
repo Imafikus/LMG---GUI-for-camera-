@@ -94,25 +94,24 @@ class BrowseWindow(QWidget):
         files = str(QFileDialog.getExistingDirectory())
         
         self.lbl0 = QLabel("Current Path: "+ files, self)
-        self.lbl0.move(10, 40)
+        self.lbl0.move(10, 20)
         self.lbl1 = QLabel("Search again?", self)
-        self.lbl1.move(80, 100)
+        self.lbl1.move(170, 80)
 
         
         self.yes = QPushButton('Yes', self)
-        self.yes.resize(150, 50)
-        self.yes.move(95, 100)
-        self.yes.clicked.connect(self.search)
+        self.yes.resize(100, 35)
+        self.yes.move(125, 120)
+      """  self.yes.clicked.connect(self.search#, files)
         
         no = QPushButton('No', self)
-        no.resize(150, 50)
-        no.move(195, 100)
+        no.resize(100, 35)
+        no.move(225, 120)
         no.clicked.connect(self.search)
     
-    def search(self):
-        print("Kurac")
-
-                                              
+    def search(self, files):
+        files = str(QFileDialog.getExistingDirectory())
+      """ #PROVERITI                                        
 
 class SaveWindow(QWidget):
     
