@@ -48,6 +48,7 @@ class FOVWindow(QWidget):
         
     def okButton(self):
         print ("FOV")
+        self.close()
         
         self.setWindowIcon(QIcon("fov.png")) 
 
@@ -68,15 +69,19 @@ class CVPWindow(QWidget):
         self.lbl2 = QLabel("p2", self)
         self.lbl2.move(170, 10)
 
-        
-        p1 = QLineEdit(self)
-        p1.move(40, 30)
-        p1.resize(45,30)
+        f = open("config/cvp.txt", "r")
+        values = f.readlines()
+        f.close()
 
-        p2 = QLineEdit(self)
-        p2.move(170, 30)
-        p2.resize(45,30)
+        self.p1 = QLineEdit(self)
+        self.p1.move(40, 30)
+        self.p1.resize(45,30)
+        self.p1.setText(values[0])
 
+        self.p2 = QLineEdit(self)
+        self.p2.move(170, 30)
+        self.p2.resize(45,30)
+        self.p2.setText(values[1])
         
         OK = QPushButton('OK', self)
         OK.resize(150, 50)
@@ -84,9 +89,14 @@ class CVPWindow(QWidget):
         OK.clicked.connect(self.okButton)
 
     def okButton(self):
-        print ("FOV")
+        f = open("config/cvp.txt", "w")
+        p1 = self.p1.text()
+        p2 = self.p2.text()
         
-        self.setWindowIcon(QIcon("fov.png"))
+        f.write(p1)
+        f.write(p2)
+        f.close
+        self.close()
 
 class BrowseWindow(QWidget):
     
@@ -103,24 +113,7 @@ class BrowseWindow(QWidget):
         files = str(QFileDialog.getExistingDirectory())
         
         self.lbl0 = QLabel("Current Path: "+ files, self)
-        self.lbl0.move(10, 20)
-        """self.lbl1 = QLabel("Search again?", self)
-        self.lbl1.move(170, 80)
-
-        
-        self.yes = QPushButton('Yes', self)
-        self.yes.resize(100, 35)
-        self.yes.move(125, 120)
-        self.yes.clicked.connect(self.search#, files)
-        
-        no = QPushButton('No', self)
-        no.resize(100, 35)
-        no.move(225, 120)
-        no.clicked.connect(self.search)
-    
-    def search(self, files):
-        files = str(QFileDialog.getExistingDirectory())
-      """ #PROVERITI                                        
+        self.lbl0.move(10, 20)   
 
 class SaveWindow(QWidget):
     
