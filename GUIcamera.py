@@ -88,12 +88,12 @@ class BrowseWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        """self.setGeometry(300, 300, 300, 220)
+        self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('Browse')
         self.setWindowIcon(QIcon("fov.png"))
-        """
-        files = str(QFileDialog.getExistingDirectory(self))
+        files = str(QFileDialog.getExistingDirectory())
         print(files)
+                                              
 
 class SaveWindow(QWidget):
     
