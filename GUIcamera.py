@@ -13,7 +13,7 @@ class FOVWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 250, 220)
+        self.setGeometry(300, 300, 250, 200)
         self.setFixedSize(self.size())
         self.setWindowTitle('FOV')
         
@@ -51,11 +51,34 @@ class CVPWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 300, 220)
+        self.setGeometry(300, 300, 250, 200)
         self.setWindowTitle('CVP')
+
+        self.lbl1 = QLabel("p1", self)
+        self.lbl1.move(40, 10)
+
+        self.lbl2 = QLabel("p2", self)
+        self.lbl2.move(170, 10)
+
         
+        p1 = QLineEdit(self)
+        p1.move(40, 30)
+        p1.resize(45,30)
+
+        p2 = QLineEdit(self)
+        p2.move(170, 30)
+        p2.resize(45,30)
+
         
-        self.setWindowIcon(QIcon("fov.png")) 
+        OK = QPushButton('OK', self)
+        OK.resize(150, 50)
+        OK.move(50, 110)
+        OK.clicked.connect(self.okButton)
+
+    def okButton(self):
+        print ("FOV")
+        
+        self.setWindowIcon(QIcon("fov.png"))
 
 class BrowseWindow(QWidget):
     
@@ -65,9 +88,12 @@ class BrowseWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 300, 220)
+        """self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('Browse')
-        self.setWindowIcon(QIcon("fov.png")) 
+        self.setWindowIcon(QIcon("fov.png"))
+        """
+        files = str(QFileDialog.getExistingDirectory(self))
+        print(files)
 
 class SaveWindow(QWidget):
     
