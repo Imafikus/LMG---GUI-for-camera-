@@ -128,6 +128,20 @@ class BrowseWindow(QWidget):
         self.lbl0 = QLabel("Current Path: "+ files, self)
         self.lbl0.move(10, 20)   
 
+
+        f = open("config/browse.txt", "w")
+        f.write(files)
+        f.close()
+
+        OK = QPushButton('OK', self)
+        OK.resize(150, 50)
+        OK.move(50, 110)
+        OK.clicked.connect(self.okButton)
+
+        
+    def okButton(self):
+        self.close()     
+
 class SaveWindow(QWidget):
     
     def __init__(self):
@@ -141,12 +155,22 @@ class SaveWindow(QWidget):
         self.setWindowIcon(QIcon("save.png")) 
         self.setFixedSize(self.size())
         files = str(QFileDialog.getExistingDirectory())
-        
+			        
         self.lbl0 = QLabel("Save Path: "+ files, self)
         self.lbl0.move(10, 20)
-       
-        
 
+        f = open("config/save.txt", "w")
+        f.write(files)
+        f.close()
+
+        OK = QPushButton('OK', self)
+        OK.resize(150, 50)
+        OK.move(50, 110)
+        OK.clicked.connect(self.okButton)
+
+        
+    def okButton(self):
+        self.close()        
         
 class MainWindow(QMainWindow):
     
