@@ -14,7 +14,7 @@ class FOVWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 450, 400)
+        self.setGeometry(300, 300, 250, 400)
         self.setFixedSize(self.size())
 
         self.values = open("config/camera.txt").read().splitlines()
@@ -53,7 +53,7 @@ class FOVWindow(QWidget):
         self.p3.setText(self.values[2])
         
         #ROT part
-        self.lbl3 = QLabel("CVP:", self)
+        self.lbl3 = QLabel("CAM:", self)
         self.lbl3.move(20, 185)
 
 
@@ -74,7 +74,6 @@ class FOVWindow(QWidget):
         OK.clicked.connect(self.okButton)
         
     def okButton(self):
-        f = open("config/camera.txt", "w")
         p1 = self.p1.text()
         p2 = self.p2.text() 
         p3 = self.p3.text()
@@ -86,7 +85,8 @@ class FOVWindow(QWidget):
                 QMessageBox.warning(self, "Cannot calculate",
                     "Please enter a valid number.", QMessageBox.Cancel) 
 
-        else:        
+        else:   
+                f = open("config/camera.txt", "w")     
                 for p in data:
                         f.write(p+os.linesep)        
         
