@@ -1,1 +1,1 @@
-/home/imafikus/Python/GUIcamera/config
+/home/imafikus/Python/GUIcamera/icons

@@ -14,49 +14,73 @@ class FOVWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 250, 200)
+        self.setGeometry(300, 300, 450, 400)
         self.setFixedSize(self.size())
-        self.setWindowTitle('FOV')
-        
-        self.lbl1 = QLabel("p1", self)
-        self.lbl1.move(40, 10)
 
-        self.lbl1 = QLabel("p2", self)
-        self.lbl1.move(110, 10)
-
-        self.lbl2 = QLabel("p3", self)
-        self.lbl2.move(170, 10)
-
-        self.values = open("config/fov.txt").read().splitlines()
+        self.values = open("config/camera.txt").read().splitlines()
         
-        
+        #FOV part
+        self.lbl1 = QLabel("FOV:", self)
+        self.lbl1.move(20, 55)
+
+        self.lbl2 = QLabel("Lat.", self)
+        self.lbl2.move(80, 30)
+
         self.p1 = QLineEdit(self)
-        self.p1.move(40, 30)
+        self.p1.move(70, 50)
         self.p1.resize(45,30)
         self.p1.setText(self.values[0])
         
+        #CVP part
+        self.lbl3 = QLabel("CVP:", self)
+        self.lbl3.move(20, 120)
+
+        self.lbl4 = QLabel("Az.", self)
+        self.lbl4.move(80, 95)
+
         self.p2 = QLineEdit(self)
-        self.p2.move(100, 30)
+        self.p2.move(70, 115)
         self.p2.resize(45,30)
         self.p2.setText(self.values[1])
 
+        
+        self.lbl5 = QLabel("H.", self)
+        self.lbl5.move(140, 95)
+
         self.p3 = QLineEdit(self)
-        self.p3.move(160, 30)
+        self.p3.move(130, 115)
         self.p3.resize(45,30)
         self.p3.setText(self.values[2])
         
+        #ROT part
+        self.lbl3 = QLabel("CVP:", self)
+        self.lbl3.move(20, 185)
+
+
+        self.lbl6 = QLabel("Deg.", self)
+        self.lbl6.move(80, 160)
+
+        self.p4 = QLineEdit(self)
+        self.p4.move(70, 180)
+        self.p4.resize(45,30)
+        self.p4.setText(self.values[3])
+
+
+
+                
         OK = QPushButton('OK', self)
         OK.resize(150, 50)
-        OK.move(50, 110)
+        OK.move(50, 250)
         OK.clicked.connect(self.okButton)
         
     def okButton(self):
-        f = open("config/fov.txt", "w")
+        f = open("config/camera.txt", "w")
         p1 = self.p1.text()
         p2 = self.p2.text() 
         p3 = self.p3.text()
+        p4 = self.p4.text()
         
-        data = [p1, p2, p3]        
+        data = [p1, p2, p3, p4]        
         
         for p in data:
                 f.write(p+os.linesep)        
@@ -64,52 +88,7 @@ class FOVWindow(QWidget):
         f.close() 
         self.close()
 
-class CVPWindow(QWidget):
-    
-    def __init__(self):
-        super().__init__()
-        
-        self.initUI()
 
-    def initUI(self):
-        self.setGeometry(300, 300, 250, 200)
-        self.setWindowTitle('CVP')
-
-        self.lbl1 = QLabel("p1", self)
-        self.lbl1.move(40, 10)
-
-        self.lbl2 = QLabel("p2", self)
-        self.lbl2.move(170, 10)
-
-        self.values = open("config/cvp.txt").read().splitlines()
-        
-
-        self.p1 = QLineEdit(self)
-        self.p1.move(40, 30)
-        self.p1.resize(45,30)
-        self.p1.setText(self.values[0])
-
-        self.p2 = QLineEdit(self)
-        self.p2.move(170, 30)
-        self.p2.resize(45,30)
-        self.p2.setText(self.values[1])
-        
-        OK = QPushButton('OK', self)
-        OK.resize(150, 50)
-        OK.move(50, 110)
-        OK.clicked.connect(self.okButton)
-
-    def okButton(self):
-        f = open("config/cvp.txt", "w")
-        p1 = self.p1.text()
-        p2 = self.p2.text()
-        
-        data = [p1, p2]
-
-        for p in data:
-                f.write(p + os.linesep)
-        f.close()
-        self.close()
 
 class BrowseWindow(QWidget):
     
@@ -121,7 +100,6 @@ class BrowseWindow(QWidget):
     def initUI(self):
         self.setGeometry(300, 300, 450, 200)
         self.setWindowTitle('Browse')
-        self.setWindowIcon(QIcon("fov.png"))
         self.setFixedSize(self.size())
         files = str(QFileDialog.getExistingDirectory())
         
@@ -184,13 +162,9 @@ class MainWindow(QMainWindow):
 
         
         #toolbar init
-        FOVAct = QAction(QIcon('icons/fov.png'), 'FOV', self)
+        FOVAct = QAction(QIcon('icons/camera.png'), 'Camera', self)
         FOVAct.setShortcut('Ctrl+F')
         FOVAct.triggered.connect(self.fov)
-
-        CVPAct = QAction(QIcon('icons/cvp.png'), 'CVP', self)
-        CVPAct.setShortcut('Ctrl+P')
-        CVPAct.triggered.connect(self.cvp)
 
         BrowseAct = QAction(QIcon('icons/browse.png'), 'Browse', self)
         BrowseAct.setShortcut('Ctrl+B')
@@ -201,12 +175,9 @@ class MainWindow(QMainWindow):
         SaveAct.triggered.connect(self.save)
                 
         
-        self.toolbar = self.addToolBar('FOV')
+        self.toolbar = self.addToolBar('Camera')
         self.toolbar.addAction(FOVAct)
-
-        self.toolbar = self.addToolBar('CVP')
-        self.toolbar.addAction(CVPAct)
-
+       
         self.toolbar = self.addToolBar('Browse')
         self.toolbar.addAction(BrowseAct)
 
@@ -287,20 +258,12 @@ class MainWindow(QMainWindow):
         calc.move(95, self.height-100)
         calc.clicked.connect(self.calculateButton)
         
-
-
-        
-    
         self.show()
         
         
     def fov(self):
         self.FOV = FOVWindow()
         self.FOV.show()
-
-    def cvp(self):
-        self.CVP = CVPWindow()
-        self.CVP.show()
 
     def browse(self):
         self.B = BrowseWindow()
@@ -312,17 +275,17 @@ class MainWindow(QMainWindow):
 
     def calculateButton(self):
         
-        fov = open("config/fov.txt", "r").read().splitlines()
-        cvp = open("config/cvp.txt", "r").read().splitlines()
+        camera = open("config/camera.txt", "r").read().splitlines()
         browse = open("config/browse.txt", "r").read().splitlines()        
         save = open("config/save.txt", "r").read().splitlines()
 
-        settings = [fov, cvp, browse, save]
+        settings = [camera, browse, save]
 
         print(settings)
         
                 
-
+    #def checkInput(self):
+        
     
 
     """
