@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
+import os
 
 
 
@@ -26,24 +27,23 @@ class FOVWindow(QWidget):
         self.lbl2 = QLabel("p3", self)
         self.lbl2.move(170, 10)
 
-        f = open("config/fov.txt", "r")
-        values = f.readlines()
-        f.close()
+        self.values = open("config/fov.txt").read().splitlines()
+        
         
         self.p1 = QLineEdit(self)
         self.p1.move(40, 30)
         self.p1.resize(45,30)
-        self.p1.setText(values[0])
+        self.p1.setText(self.values[0])
         
         self.p2 = QLineEdit(self)
         self.p2.move(100, 30)
         self.p2.resize(45,30)
-        self.p2.setText(values[1])
+        self.p2.setText(self.values[1])
 
         self.p3 = QLineEdit(self)
         self.p3.move(160, 30)
         self.p3.resize(45,30)
-        self.p3.setText(values[2])
+        self.p3.setText(self.values[2])
         
         OK = QPushButton('OK', self)
         OK.resize(150, 50)
@@ -56,9 +56,11 @@ class FOVWindow(QWidget):
         p2 = self.p2.text() 
         p3 = self.p3.text()
         
-        f.write(p1+'\n')
-        f.write(p2+'\n')
-        f.write(p3+'\n')
+        data = [p1, p2, p3]        
+        
+        for p in data:
+                f.write(p+os.linesep)        
+        
         f.close() 
         self.close()
 
@@ -79,9 +81,8 @@ class CVPWindow(QWidget):
         self.lbl2 = QLabel("p2", self)
         self.lbl2.move(170, 10)
 
-        f = open("config/cvp.txt", "r")
-        self.values = f.readlines()
-        f.close()
+        self.values = open("config/cvp.txt").read().splitlines()
+        
 
         self.p1 = QLineEdit(self)
         self.p1.move(40, 30)
@@ -102,13 +103,11 @@ class CVPWindow(QWidget):
         f = open("config/cvp.txt", "w")
         p1 = self.p1.text()
         p2 = self.p2.text()
-        if(self.values[0] != p1): p1 = p1 + '\n'
-
-        #print(p1)
-        #print(p2)
         
-        f.write(p1)
-        f.write(p2)
+        data = [p1, p2]
+
+        for p in data:
+                f.write(p + os.linesep)
         f.close()
         self.close()
 
