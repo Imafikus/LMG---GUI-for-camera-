@@ -6,7 +6,7 @@ import os
 
 
 
-class FOVWindow(QWidget):
+class CameraWindow(QWidget):
     
     def __init__(self):
         super().__init__()
@@ -182,9 +182,9 @@ class MainWindow(QMainWindow):
 
         
         #toolbar init
-        FOVAct = QAction(QIcon('icons/camera.png'), 'Camera', self)
-        FOVAct.setShortcut('Ctrl+F')
-        FOVAct.triggered.connect(self.fov)
+        CameraAct = QAction(QIcon('icons/camera.png'), 'Camera', self)
+        CameraAct.setShortcut('Ctrl+F')
+        CameraAct.triggered.connect(self.camera)
 
         BrowseAct = QAction(QIcon('icons/browse.png'), 'Browse', self)
         BrowseAct.setShortcut('Ctrl+B')
@@ -196,7 +196,7 @@ class MainWindow(QMainWindow):
                 
         
         self.toolbar = self.addToolBar('Camera')
-        self.toolbar.addAction(FOVAct)
+        self.toolbar.addAction(CameraAct)
        
         self.toolbar = self.addToolBar('Browse')
         self.toolbar.addAction(BrowseAct)
@@ -216,63 +216,64 @@ class MainWindow(QMainWindow):
 
         #date1 input init
 
-        d1 = QComboBox(self)
+        self.d1 = QComboBox(self)
         for day in range (1, 32):      
-                d1.addItem(str(day)+".")
-        d1.resize(50, 30)        
-        d1.move(20, 70)
+                self.d1.addItem(str(day)+".")
+        self.d1.resize(50, 30)        
+        self.d1.move(20, 70)
 
-        m1 = QComboBox(self)
+        self.m1 = QComboBox(self)
         for month in range (1, 13):      
-                m1.addItem(str(month)+".")
-        m1.resize(50, 30)        
-        m1.move(70, 70)
+                self.m1.addItem(str(month)+".")
+        self.m1.resize(50, 30)        
+        self.m1.move(70, 70)
 
-        y1 = QComboBox(self)
+        self.y1 = QComboBox(self)
         for year in range (2000, 2051):      
-                y1.addItem(str(year)+".")
-        y1.resize(70, 30)        
-        y1.move(120, 70)
+                self.y1.addItem(str(year)+".")
+        self.y1.resize(70, 30)        
+        self.y1.move(120, 70)
 
-        hour1 = QLineEdit(self)
-        hour1.move(250, 70)
-        hour1.resize(30,30)
+        self.hour1 = QLineEdit(self)
+        self.hour1.move(250, 70)
+        self.hour1.resize(30,30)
 
-        min1 = QLineEdit(self)
-        min1.move(290, 70)
-        min1.resize(30,30)
+        self.min1 = QLineEdit(self)
+        self.min1.move(290, 70)
+        self.min1.resize(30,30)
         
         #date 2 input init
         move_down = 80
 
-        d2 = QComboBox(self)
+        self.d2 = QComboBox(self)
         for day in range (1, 32):      
-                d2.addItem(str(day)+".")
-        d2.resize(50, 30)        
-        d2.move(20, 70+move_down)
+                self.d2.addItem(str(day)+".")
+        self.d2.resize(50, 30)        
+        self.d2.move(20, 70+move_down)
 
-        m2 = QComboBox(self)
+        self.m2 = QComboBox(self)
         for month in range (1, 13):      
-                m2.addItem(str(month)+".")
-        m2.resize(50, 30)        
-        m2.move(70, 70+move_down)
+                self.m2.addItem(str(month)+".")
+        self.m2.resize(50, 30)        
+        self.m2.move(70, 70+move_down)
 
-        y2 = QComboBox(self)
+        self.y2 = QComboBox(self)
         for year in range (2000, 2051):      
-                y2.addItem(str(year)+".")
-        y2.resize(70, 30)        
-        y2.move(120, 70+move_down)
+                self.y2.addItem(str(year)+".")
+        self.y2.resize(70, 30)        
+        self.y2.move(120, 70+move_down)
 
-        hour2 = QLineEdit(self)
-        hour2.resize(30,30)
-        hour2.move(250, 70+move_down)
+        self.hour2 = QLineEdit(self)
+        self.hour2.resize(30,30)
+        self.hour2.move(250, 70+move_down)
         
-        min2 = QLineEdit(self)
-        min2.resize(30,30)
-        min2.move(290, 70+move_down)
+        self.min2 = QLineEdit(self)
+        self.min2.resize(30,30)
+        self.min2.move(290, 70+move_down)
         
         
         #Button init
+
         calc = QPushButton('Calculate', self)
         calc.resize(150, 50)
         calc.move(95, self.height-100)
@@ -281,9 +282,9 @@ class MainWindow(QMainWindow):
         self.show()
         
         
-    def fov(self):
-        self.FOV = FOVWindow()
-        self.FOV.show()
+    def camera(self):
+        self.camera = CameraWindow()
+        self.camera.show()
 
     def browse(self):
         self.B = BrowseWindow()
@@ -300,7 +301,14 @@ class MainWindow(QMainWindow):
         browse = open("config/browse.txt", "r").read().splitlines()        
         save = open("config/save.txt", "r").read().splitlines()
 
-        settings = [camera, browse, save]
+        date1 = str(self.d1.currentText()) + str(self.m1.currentText()) + str(self.y1.currentText()) + self.hour1.text() + self.min1.text()
+
+        date2 = str(self.d2.currentText()) + str(self.m2.currentText()) + str(self.y2.currentText()) + self.hour2.text() + self.min2.text()
+
+
+        settings = [camera, browse, save, date1, date2]
+        
+        print(settings)
         
         
 
