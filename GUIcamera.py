@@ -80,14 +80,34 @@ class FOVWindow(QWidget):
         p3 = self.p3.text()
         p4 = self.p4.text()
         
-        data = [p1, p2, p3, p4]        
-        
-        for p in data:
-                f.write(p+os.linesep)        
-        
-        f.close() 
-        self.close()
+        data = [p1, p2, p3, p4]  
 
+        if self.checkInput(data) == False:
+                QMessageBox.warning(self, "Cannot calculate",
+                    "Please enter a valid number.", QMessageBox.Cancel) 
+
+        else:        
+                for p in data:
+                        f.write(p+os.linesep)        
+        
+                f.close() 
+                self.close()
+    
+    def is_number(self,s):
+            try:
+                float(s)
+                return True
+            except ValueError:
+                return False    
+                    
+    def checkInput(self, data):
+        check = True
+        for p in data:
+                if self.is_number(p) == False:
+                        check = False
+        return check      
+        
+        
 
 
 class BrowseWindow(QWidget):
@@ -276,17 +296,15 @@ class MainWindow(QMainWindow):
     def calculateButton(self):
         
         camera = open("config/camera.txt", "r").read().splitlines()
+        
         browse = open("config/browse.txt", "r").read().splitlines()        
         save = open("config/save.txt", "r").read().splitlines()
 
         settings = [camera, browse, save]
+        
+        
 
-        print(settings)
-        
-                
-    #def checkInput(self):
-        
-    
+            
 
     """
         def closeEvent(self, event):
