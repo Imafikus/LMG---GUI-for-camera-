@@ -56,9 +56,9 @@ class FOVWindow(QWidget):
         p2 = self.p2.text() 
         p3 = self.p3.text()
         
-        f.write(p1)
-        f.write(p2)
-        f.write(p3)
+        f.write(p1+'\n')
+        f.write(p2+'\n')
+        f.write(p3+'\n')
         f.close() 
         self.close()
 
@@ -80,18 +80,18 @@ class CVPWindow(QWidget):
         self.lbl2.move(170, 10)
 
         f = open("config/cvp.txt", "r")
-        values = f.readlines()
+        self.values = f.readlines()
         f.close()
 
         self.p1 = QLineEdit(self)
         self.p1.move(40, 30)
         self.p1.resize(45,30)
-        self.p1.setText(values[0])
+        self.p1.setText(self.values[0])
 
         self.p2 = QLineEdit(self)
         self.p2.move(170, 30)
         self.p2.resize(45,30)
-        self.p2.setText(values[1])
+        self.p2.setText(self.values[1])
         
         OK = QPushButton('OK', self)
         OK.resize(150, 50)
@@ -102,6 +102,10 @@ class CVPWindow(QWidget):
         f = open("config/cvp.txt", "w")
         p1 = self.p1.text()
         p2 = self.p2.text()
+        if(self.values[0] != p1): p1 = p1 + '\n'
+
+        #print(p1)
+        #print(p2)
         
         f.write(p1)
         f.write(p2)
