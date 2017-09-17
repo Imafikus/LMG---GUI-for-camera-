@@ -311,7 +311,17 @@ class MainWindow(QMainWindow):
         self.S.show()
 
     def calculateButton(self):
-        print("Banjo")
+        
+        fov = open("config/fov.txt", "r").read().splitlines()
+        cvp = open("config/cvp.txt", "r").read().splitlines()
+        browse = open("config/browse.txt", "r").read().splitlines()        
+        save = open("config/save.txt", "r").read().splitlines()
+
+        settings = [fov, cvp, browse, save]
+
+        print(settings)
+        
+                
 
     
 
