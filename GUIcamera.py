@@ -169,7 +169,38 @@ class SaveWindow(QWidget):
         
     def okButton(self):
         self.close()        
+
+class CalcWindow(QWidget):
+    
+    def __init__(self):
+        super().__init__()
         
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, 450, 200)
+        self.setWindowTitle('Table')
+        self.setFixedSize(self.size())
+
+        
+        OK = QPushButton('OK', self)
+        OK.resize(150, 50)
+        OK.move(50, 110)
+        OK.clicked.connect(self.okButton)
+
+
+        self.camera = open("config/camera.txt", "r").read().splitlines()
+        
+        self.browse = open("config/browse.txt", "r").read().splitlines()        
+        self.save = open("config/save.txt", "r").read().splitlines()
+
+        self.begin = open("config/begin.txt", "r").read().splitlines()
+    
+    #def BanjoRadiSvojaSranja()    
+    
+    def okButton(self):
+        self.close()     
+       
 class MainWindow(QMainWindow):
     
     def __init__(self):
@@ -296,19 +327,26 @@ class MainWindow(QMainWindow):
 
     def calculateButton(self):
         
-        camera = open("config/camera.txt", "r").read().splitlines()
+        """camera = open("config/camera.txt", "r").read().splitlines()
         
         browse = open("config/browse.txt", "r").read().splitlines()        
         save = open("config/save.txt", "r").read().splitlines()
+        """
+        begin = str(self.d1.currentText()) + str(self.m1.currentText()) + str(self.y1.currentText()) + self.hour1.text() + self.min1.text()
 
-        date1 = str(self.d1.currentText()) + str(self.m1.currentText()) + str(self.y1.currentText()) + self.hour1.text() + self.min1.text()
+        fbegin = open("config/begin.txt", "w")
+        fbegin.write(begin)
 
-        date2 = str(self.d2.currentText()) + str(self.m2.currentText()) + str(self.y2.currentText()) + self.hour2.text() + self.min2.text()
+        end = str(self.d2.currentText()) + str(self.m2.currentText()) + str(self.y2.currentText()) + self.hour2.text() + self.min2.text()
+
+        fend = open("config/end.txt", "w")
+        fend.write(end)
 
 
-        settings = [camera, browse, save, date1, date2]
-        
-        print(settings)
+        #settings = [camera, browse, save, date1, date2]
+        self.C = CalcWindow()
+        self.C.show()
+       #print(settings)
         
         
 
