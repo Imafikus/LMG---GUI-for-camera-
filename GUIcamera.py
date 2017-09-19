@@ -196,12 +196,12 @@ class CalcWindow(QWidget):
         self.save = open("config/save.txt", "r").read().splitlines()
 
         self.begin = open("config/begin.txt", "r").read().splitlines()
+
+        self.end = open("config/end.txt", "r").read().splitlines()
     
     #def BanjoRadiSvojaSranja()    
                 
-    def createTable(self):
-        results = open("config/results.txt", "r")
-
+    
     def okButton(self):
         self.close()     
        
@@ -330,32 +330,38 @@ class MainWindow(QMainWindow):
         self.S.show()
 
     def calculateButton(self):
+            
+        self.Banjo = (["2017-02-03 19:35:39", "11%"], ["2017-02-03 19:38:39", "21%"], ["2017-02-03 19:41:39", "39%"], ["2017-02-03 19:44:39", "56%"])
+
+        self.storeDates()
+        self.makeCSV()
+        self.C = CalcWindow()
+        self.C.show()
         
-        """camera = open("config/camera.txt", "r").read().splitlines()
-        
-        browse = open("config/browse.txt", "r").read().splitlines()        
-        save = open("config/save.txt", "r").read().splitlines()
-        """
+    def storeDates(self):
+
         begin = str(self.d1.currentText()) + str(self.m1.currentText()) + str(self.y1.currentText()) + self.hour1.text() + self.min1.text()
 
         fbegin = open("config/begin.txt", "w")
         fbegin.write(begin)
+        fbegin.close()
 
         end = str(self.d2.currentText()) + str(self.m2.currentText()) + str(self.y2.currentText()) + self.hour2.text() + self.min2.text()
 
         fend = open("config/end.txt", "w")
         fend.write(end)
-
-
-        #settings = [camera, browse, save, date1, date2]
-        self.C = CalcWindow()
-        self.C.show()
-       #print(settings)
+        fend.close()
         
-        
-
-            
-
+    def makeCSV(self):
+                        
+        code = self.Banjo[0][0]
+        file_path = "tables/"+code+".csv"
+        f = open(file_path, "w")
+        f.write("time,cloudiness"+'\n')
+        for info in self.Banjo:
+                        data = str(info[0]) + "," + (info[1]) + '\n'
+                        f.write(data)
+        f.close()
     """
         def closeEvent(self, event):
         
