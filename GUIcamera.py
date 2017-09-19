@@ -253,19 +253,19 @@ class MainWindow(QMainWindow):
 
         self.d1 = QComboBox(self)
         for day in range (1, 32):      
-                self.d1.addItem(str(day)+".")
+                self.d1.addItem(str(day))
         self.d1.resize(50, 30)        
         self.d1.move(20, 70)
 
         self.m1 = QComboBox(self)
         for month in range (1, 13):      
-                self.m1.addItem(str(month)+".")
+                self.m1.addItem(str(month))
         self.m1.resize(50, 30)        
         self.m1.move(70, 70)
 
         self.y1 = QComboBox(self)
         for year in range (2000, 2051):      
-                self.y1.addItem(str(year)+".")
+                self.y1.addItem(str(year))
         self.y1.resize(70, 30)        
         self.y1.move(120, 70)
 
@@ -282,19 +282,19 @@ class MainWindow(QMainWindow):
 
         self.d2 = QComboBox(self)
         for day in range (1, 32):      
-                self.d2.addItem(str(day)+".")
+                self.d2.addItem(str(day))
         self.d2.resize(50, 30)        
         self.d2.move(20, 70+move_down)
 
         self.m2 = QComboBox(self)
         for month in range (1, 13):      
-                self.m2.addItem(str(month)+".")
+                self.m2.addItem(str(month))
         self.m2.resize(50, 30)        
         self.m2.move(70, 70+move_down)
 
         self.y2 = QComboBox(self)
         for year in range (2000, 2051):      
-                self.y2.addItem(str(year)+".")
+                self.y2.addItem(str(year))
         self.y2.resize(70, 30)        
         self.y2.move(120, 70+move_down)
 
