@@ -14,16 +14,17 @@ class CameraWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 250, 400)
+        self.setGeometry(300, 300, 250, 350)
+        self.setWindowTitle('Field of View')
         self.setFixedSize(self.size())
 
         self.values = open("config/camera.txt").read().splitlines()
         
         #FOV part
-        self.lbl1 = QLabel("FOV:", self)
+        self.lbl1 = QLabel("Width:", self)
         self.lbl1.move(20, 55)
 
-        self.lbl2 = QLabel("Lat.", self)
+        self.lbl2 = QLabel("Deg.", self)
         self.lbl2.move(80, 30)
 
         self.p1 = QLineEdit(self)
@@ -32,28 +33,28 @@ class CameraWindow(QWidget):
         self.p1.setText(self.values[0])
         
         #CVP part
-        self.lbl3 = QLabel("CVP:", self)
+        self.lbl3 = QLabel("Center of View:", self)
         self.lbl3.move(20, 120)
 
         self.lbl4 = QLabel("Az.", self)
-        self.lbl4.move(80, 95)
+        self.lbl4.move(140, 95)
 
         self.p2 = QLineEdit(self)
-        self.p2.move(70, 115)
+        self.p2.move(130, 115)
         self.p2.resize(45,30)
         self.p2.setText(self.values[1])
 
         
         self.lbl5 = QLabel("H.", self)
-        self.lbl5.move(140, 95)
+        self.lbl5.move(200, 95)
 
         self.p3 = QLineEdit(self)
-        self.p3.move(130, 115)
+        self.p3.move(190, 115)
         self.p3.resize(45,30)
         self.p3.setText(self.values[2])
         
         #ROT part
-        self.lbl3 = QLabel("CAM:", self)
+        self.lbl3 = QLabel("Rot. :", self)
         self.lbl3.move(20, 185)
 
 
@@ -197,7 +198,10 @@ class CalcWindow(QWidget):
         self.begin = open("config/begin.txt", "r").read().splitlines()
     
     #def BanjoRadiSvojaSranja()    
-    
+                
+    def createTable(self):
+        results = open("config/results.txt", "r")
+
     def okButton(self):
         self.close()     
        
@@ -213,7 +217,7 @@ class MainWindow(QMainWindow):
 
         
         #toolbar init
-        CameraAct = QAction(QIcon('icons/camera.png'), 'Camera', self)
+        CameraAct = QAction(QIcon('icons/fov.png'), 'Field of View', self)
         CameraAct.setShortcut('Ctrl+F')
         CameraAct.triggered.connect(self.camera)
 
