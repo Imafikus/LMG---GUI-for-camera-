@@ -351,16 +351,22 @@ class MainWindow(QMainWindow):
         
 
     def calculateButton(self):
-           
-        #if self.checkInput =
-         
-        self.Banjo = (["2017-02-03 19:35:39", "11%"], ["2017-02-03 19:38:39", "21%"], ["2017-02-03 19:41:39", "39%"], ["2017-02-03 19:44:39", "56%"])
+        if self.checkHM() == False:
+                error = "Hours must have values between 0-24.\nMinutes must have values between 0-60."
+                QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
+        else:
+                if self.checkYMD() == False:
+                        error = "Start date must me older than End date."
+                        QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
+                else:
+                        #print (10 + int(self.y1.currentText())) 
+                        self.Banjo = (["2017-02-03 19:35:39", "11%"], ["2017-02-03 19:38:39", "21%"], ["2017-02-03 19:41:39", "39%"], ["2017-02-03 19:44:39", "56%"])
 
-        self.storeDates()
-        self.makeCSV()
-        self.C = CalcWindow()
-        self.C.show()
-        
+                        self.storeDates()
+                        self.makeCSV()
+                        self.C = CalcWindow()
+                        self.C.show()
+                        
     def storeDates(self):
 
         begin = str(self.d1.currentText()) + str(self.m1.currentText()) + str(self.y1.currentText()) + self.hour1.text() + self.min1.text()
@@ -385,20 +391,66 @@ class MainWindow(QMainWindow):
                         data = str(info[0]) + "," + (info[1]) + '\n'
                         f.write(data)
         f.close()
-    """
-        def closeEvent(self, event):
         
-        reply = QMessageBox.question(self, 'Message',
-            "Are you sure to quit?", QMessageBox.Yes | 
-            QMessageBox.No, QMessageBox.No)
+    def is_number(self,s):
+            try:
+                int(s)
+                return True
+            except ValueError:
+                return False            
+    
+    def checkHM(self):
+        check = True
+        
+        h1 = self.hour1.text()
+        h2 = self.hour2.text()
 
-        if reply == QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()
-    """     
-    def center(self):
+        m1 = self.min1.text()
+        m2 = self.min2.text()
         
+        if(self.is_number(h1) == False) or (self.is_number(h2) == False) or (self.is_number(m1) == False) (self.is_number(m2) == False):
+                
+                check = False
+                return check
+        if(int(h1) < 0 and int(h1) > 24) or (int(h2) < 0 and int(h2) > 24) or (int(m1) < 0 and int(m1) > 60) or (int(m2) < 0 and int(m2) > 60):
+                check = False
+                return check
+        return check
+        
+    def checkYMD(self):
+        check = True
+
+        year1 = int(self.y1.currentText())
+        year2 = int(self.y2.currentText())
+
+        month1 = int(self.m1.currentText())
+        month2 = int(self.m2.currentText())
+
+        day1 = int(self.d1.currentText())
+        day2 = int(self.d2.currentText())
+
+        hour1 = int(self.hour1.text())
+        hour2 = int(self.hour2.text())
+
+        min1 = int(self.min1.text())
+        min1 = int(self.min2.text())
+        
+        if (year1 > year2):
+                check = False
+                return check
+        if (year1 == year2):
+                if(month1 > month2): 
+                        check = False
+                        return check
+                if(month1 == month2):
+                        if(day1 >= day2):
+                                check = False
+                                return check
+        return check
+                        
+#vratiti sranje iz todo.py ovde
+    def center(self):
+
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
