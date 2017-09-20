@@ -141,36 +141,6 @@ class BrowseWindow(QWidget):
     def okButton(self):
         self.close()     
 
-class SaveWindow(QWidget):
-    
-    def __init__(self):
-        super().__init__()
-        
-        self.initUI()
-
-    def initUI(self):
-        self.setGeometry(300, 300, 450, 200)
-        self.setWindowTitle('Save')
-        self.setWindowIcon(QIcon("save.png")) 
-        self.setFixedSize(self.size())
-        files = str(QFileDialog.getExistingDirectory())
-			        
-        self.lbl0 = QLabel("Save Path: "+ files, self)
-        self.lbl0.move(10, 20)
-
-        f = open("config/save.txt", "w")
-        f.write(files)
-        f.close()
-
-        OK = QPushButton('OK', self)
-        OK.resize(150, 50)
-        OK.move(50, 110)
-        OK.clicked.connect(self.okButton)
-
-        
-    def okButton(self):
-        self.close()        
-
 class CalcWindow(QWidget):
     
     def __init__(self):
@@ -225,19 +195,16 @@ class MainWindow(QMainWindow):
         BrowseAct.setShortcut('Ctrl+B')
         BrowseAct.triggered.connect(self.browse)
 
-        SaveAct = QAction(QIcon('icons/save.png'), 'Save', self)
+        """SaveAct = QAction(QIcon('icons/save.png'), 'Save', self)
         SaveAct.setShortcut('Ctrl+S')
         SaveAct.triggered.connect(self.save)
-                
+        """        
         
         self.toolbar = self.addToolBar('Camera')
         self.toolbar.addAction(CameraAct)
        
         self.toolbar = self.addToolBar('Browse')
         self.toolbar.addAction(BrowseAct)
-
-        self.toolbar = self.addToolBar('Save')
-        self.toolbar.addAction(SaveAct)
 
         #window init
         self.width = 340
@@ -324,10 +291,6 @@ class MainWindow(QMainWindow):
     def browse(self):
         self.B = BrowseWindow()
         self.B.show()
-
-    def save(self):
-        self.S = SaveWindow()
-        self.S.show()
 
     def calculateButton(self):
             
