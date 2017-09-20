@@ -93,13 +93,7 @@ class CameraWindow(QWidget):
         self.Rot_msg = ""
         if self.checkRot() == False: self.Rot_msg = "Height must have a value between 0-90.\n"
          
-        """if self.checkInput() == False: print("Lose je")
-        else: print ("Dobro je")
-        """
-        print(self.checkWoV())
-        print(self.checkAz())
-        print(self.checkH())
-        print(self.checkRot())
+        
         if self.checkInput() == False:
                 error = self.WoV_msg + self.Az_msg + self.H_msg + self.Rot_msg
                 QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
@@ -115,7 +109,7 @@ class CameraWindow(QWidget):
 
     def is_number(self,s):
             try:
-                float(s)
+                int(s)
                 return True
             except ValueError:
                 return False    
@@ -127,8 +121,8 @@ class CameraWindow(QWidget):
         check = True
         if self.is_number(self.WoV)==False:
                 check = False
-                return check
-        if int(self.WoV) < 0 and int(self.WoV) > 180:
+                #return check
+        if int(self.WoV) < 0 or int(self.WoV) > 180:
                 check = False                
                 return check
         return check    
@@ -138,7 +132,7 @@ class CameraWindow(QWidget):
         if self.is_number(self.Az)==False:
                 check = False
                 return check
-        if int(self.Az) < 0 and int(self.Az) > 360:
+        if int(self.Az) < 0 or int(self.Az) > 360:
                 check = False                
                 return check
         return check
@@ -148,7 +142,7 @@ class CameraWindow(QWidget):
         if self.is_number(self.H)==False:
                 check = False
                 return check
-        if int(self.H) < 0 and int(self.H) > 90:
+        if int(self.H) < 0 or int(self.H) > 90:
                 check = False                
                 return check
         return check
@@ -158,7 +152,7 @@ class CameraWindow(QWidget):
         if self.is_number(self.Rot)==False:
                 check = False
                 return check
-        if int(self.Rot) < 0 and int(self.Rot) > 90:
+        if int(self.Rot) < 0 or int(self.Rot) > 90:
                 check = False                
                 return check
         return check
