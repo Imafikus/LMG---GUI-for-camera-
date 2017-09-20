@@ -21,14 +21,14 @@ class CameraWindow(QWidget):
         self.values = open("config/camera.txt").read().splitlines()
         
         #FOV part
-        self.lbl1 = QLabel("Width:", self)
+        self.lbl1 = QLabel("Width of View:", self)
         self.lbl1.move(20, 55)
 
         self.lbl2 = QLabel("Deg.", self)
-        self.lbl2.move(80, 30)
+        self.lbl2.move(140, 30)
 
         self.p1 = QLineEdit(self)
-        self.p1.move(70, 50)
+        self.p1.move(135, 50)
         self.p1.resize(45,30)
         self.p1.setText(self.values[0])
         
@@ -40,7 +40,7 @@ class CameraWindow(QWidget):
         self.lbl4.move(140, 95)
 
         self.p2 = QLineEdit(self)
-        self.p2.move(130, 115)
+        self.p2.move(135, 115)
         self.p2.resize(45,30)
         self.p2.setText(self.values[1])
 
@@ -54,15 +54,15 @@ class CameraWindow(QWidget):
         self.p3.setText(self.values[2])
         
         #ROT part
-        self.lbl3 = QLabel("Rot. :", self)
+        self.lbl3 = QLabel("Camera Rotation:", self)
         self.lbl3.move(20, 185)
 
 
         self.lbl6 = QLabel("Deg.", self)
-        self.lbl6.move(80, 160)
+        self.lbl6.move(140, 160)
 
         self.p4 = QLineEdit(self)
-        self.p4.move(70, 180)
+        self.p4.move(135, 180)
         self.p4.resize(45,30)
         self.p4.setText(self.values[3])
 
