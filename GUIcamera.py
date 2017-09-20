@@ -75,25 +75,44 @@ class CameraWindow(QWidget):
         OK.clicked.connect(self.okButton)
         
     def okButton(self):
-        p1 = self.p1.text()
-        p2 = self.p2.text() 
-        p3 = self.p3.text()
-        p4 = self.p4.text()
+
+        self.WoV = self.p1.text()
+        self.Az = self.p2.text() 
+        self.H = self.p3.text()
+        self.Rot = self.p4.text()
         
-        data = [p1, p2, p3, p4]  
+        self.WoV_msg = ""
+        if self.checkWoV() == False: self.WoV_msg = "Width of View must have a value between 0-180.\n"
 
-        if self.checkInput(data) == False:
-                QMessageBox.warning(self, "Cannot calculate",
-                    "Please enter a valid number.", QMessageBox.Cancel) 
+        self.Az_msg = ""
+        if self.checkAz() == False: self.Az_msg = "Azimuth must have a value between 0-360.\n"
 
+        self.H_msg = ""
+        if self.checkH() == False: self.H_msg = "Height must have a value between 0-90.\n"
+
+        self.Rot_msg = ""
+        if self.checkRot() == False: self.Rot_msg = "Height must have a value between 0-90.\n"
+         
+        """if self.checkInput() == False: print("Lose je")
+        else: print ("Dobro je")
+        """
+        print(self.checkWoV())
+        print(self.checkAz())
+        print(self.checkH())
+        print(self.checkRot())
+        if self.checkInput() == False:
+                error = self.WoV_msg + self.Az_msg + self.H_msg + self.Rot_msg
+                QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
+        
         else:   
-                f = open("config/camera.txt", "w")     
+                f = open("config/camera.txt", "w")
+                data = [self.WoV, self.Az, self.H, self.Rot]     
                 for p in data:
                         f.write(p+os.linesep)        
         
                 f.close() 
                 self.close()
-    
+
     def is_number(self,s):
             try:
                 float(s)
@@ -101,15 +120,48 @@ class CameraWindow(QWidget):
             except ValueError:
                 return False    
                     
-    def checkInput(self, data):
+    def checkInput(self):
+        return (self.checkWoV() and self.checkAz() and self.checkH() and self.checkRot())        
+        
+    def checkWoV(self):
         check = True
-        for p in data:
-                if self.is_number(p) == False:
-                        check = False
-        return check      
-        
-        
+        if self.is_number(self.WoV)==False:
+                check = False
+                return check
+        if int(self.WoV) < 0 and int(self.WoV) > 180:
+                check = False                
+                return check
+        return check    
 
+    def checkAz(self):
+        check = True
+        if self.is_number(self.Az)==False:
+                check = False
+                return check
+        if int(self.Az) < 0 and int(self.Az) > 360:
+                check = False                
+                return check
+        return check
+
+    def checkH(self):
+        check = True
+        if self.is_number(self.H)==False:
+                check = False
+                return check
+        if int(self.H) < 0 and int(self.H) > 90:
+                check = False                
+                return check
+        return check
+
+    def checkRot(self):
+        check = True
+        if self.is_number(self.Rot)==False:
+                check = False
+                return check
+        if int(self.Rot) < 0 and int(self.Rot) > 90:
+                check = False                
+                return check
+        return check
 
 class BrowseWindow(QWidget):
     
