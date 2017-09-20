@@ -109,7 +109,7 @@ class CameraWindow(QWidget):
 
     def is_number(self,s):
             try:
-                int(s)
+                float(s)
                 return True
             except ValueError:
                 return False    
@@ -122,7 +122,7 @@ class CameraWindow(QWidget):
         if self.is_number(self.WoV)==False:
                 check = False
                 #return check
-        if int(self.WoV) < 0 or int(self.WoV) > 180:
+        if float(self.WoV) < 0 or float(self.WoV) > 180:
                 check = False                
                 return check
         return check    
@@ -132,7 +132,7 @@ class CameraWindow(QWidget):
         if self.is_number(self.Az)==False:
                 check = False
                 return check
-        if int(self.Az) < 0 or int(self.Az) > 360:
+        if float(self.Az) < 0 or float(self.Az) > 360:
                 check = False                
                 return check
         return check
@@ -142,7 +142,7 @@ class CameraWindow(QWidget):
         if self.is_number(self.H)==False:
                 check = False
                 return check
-        if int(self.H) < 0 or int(self.H) > 90:
+        if float(self.H) < 0 or float(self.H) > 90:
                 check = False                
                 return check
         return check
@@ -152,7 +152,7 @@ class CameraWindow(QWidget):
         if self.is_number(self.Rot)==False:
                 check = False
                 return check
-        if int(self.Rot) < 0 or int(self.Rot) > 90:
+        if float(self.Rot) < 0 or float(self.Rot) > 90:
                 check = False                
                 return check
         return check
@@ -346,9 +346,14 @@ class MainWindow(QMainWindow):
     def browse(self):
         self.B = BrowseWindow()
         self.B.show()
+    
+    
+        
 
     def calculateButton(self):
-            
+           
+        #if self.checkInput =
+         
         self.Banjo = (["2017-02-03 19:35:39", "11%"], ["2017-02-03 19:38:39", "21%"], ["2017-02-03 19:41:39", "39%"], ["2017-02-03 19:44:39", "56%"])
 
         self.storeDates()
