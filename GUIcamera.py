@@ -237,14 +237,9 @@ class MainWindow(QMainWindow):
         CameraAct.setShortcut('Ctrl+F')
         CameraAct.triggered.connect(self.camera)
 
-        BrowseAct = QAction(QIcon('icons/browse.png'), 'Browse', self)
+        BrowseAct = QAction(QIcon('icons/browse.png'), 'Browse for folder', self)
         BrowseAct.setShortcut('Ctrl+B')
         BrowseAct.triggered.connect(self.browse)
-
-        """SaveAct = QAction(QIcon('icons/save.png'), 'Save', self)
-        SaveAct.setShortcut('Ctrl+S')
-        SaveAct.triggered.connect(self.save)
-        """        
         
         self.toolbar = self.addToolBar('Camera')
         self.toolbar.addAction(CameraAct)
@@ -264,6 +259,8 @@ class MainWindow(QMainWindow):
 
         #date1 input init
 
+        self.lbl1 = QLabel("Start Time:", self)
+        self.lbl1.move(70, 40)
         self.d1 = QComboBox(self)
         for day in range (1, 32):      
                 self.d1.addItem(str(day))
@@ -282,17 +279,24 @@ class MainWindow(QMainWindow):
         self.y1.resize(70, 30)        
         self.y1.move(120, 70)
 
+
+        self.lbl2 = QLabel("Hrs.", self)
+        self.lbl2.move(250, 40)
         self.hour1 = QLineEdit(self)
         self.hour1.move(250, 70)
         self.hour1.resize(30,30)
 
+        self.lbl3 = QLabel("Mins.", self)
+        self.lbl3.move(290, 40)
         self.min1 = QLineEdit(self)
         self.min1.move(290, 70)
         self.min1.resize(30,30)
         
         #date 2 input init
         move_down = 80
-
+        
+        self.lbl4 = QLabel("End Time:", self)
+        self.lbl4.move(70, 120)
         self.d2 = QComboBox(self)
         for day in range (1, 32):      
                 self.d2.addItem(str(day))
@@ -311,10 +315,15 @@ class MainWindow(QMainWindow):
         self.y2.resize(70, 30)        
         self.y2.move(120, 70+move_down)
 
+
+        self.lbl5 = QLabel("Hrs.", self)
+        self.lbl5.move(250, 120)
         self.hour2 = QLineEdit(self)
         self.hour2.resize(30,30)
         self.hour2.move(250, 70+move_down)
         
+        self.lbl5 = QLabel("Mins.", self)
+        self.lbl5.move(290, 120)
         self.min2 = QLineEdit(self)
         self.min2.resize(30,30)
         self.min2.move(290, 70+move_down)
