@@ -3,6 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import os
+from datetime import *
 
 
 
@@ -415,45 +416,35 @@ class MainWindow(QMainWindow):
     def checkYMD(self):
         check = True
 
-        year1 = int(self.y1.currentText())
-        year2 = int(self.y2.currentText())
+        year1 = self.y1.currentText()
+        year2 = self.y2.currentText()
 
-        month1 = int(self.m1.currentText())
-        month2 = int(self.m2.currentText())
+        month1 = self.m1.currentText()
+        month2 = self.m2.currentText()
 
-        day1 = int(self.d1.currentText())
-        day2 = int(self.d2.currentText())
+        day1 = self.d1.currentText()
+        day2 = self.d2.currentText()
 
         hour1 = self.hour1.text()
         hour2 = self.hour2.text()
 
         min1 = self.min1.text()
         min2 = self.min2.text()
+        
+        if (len(hour1)==1): hour1 = "0" + hour1
+        if (len(hour2)==1): hour2 = "0" + hour2        
+        
+        start = day1 + month1 + year1 + hour1 + min1
+        end = day2 + month2 + year2 + hour2 + min2
 
-        
-        
-        if (year1 > year2):
-                check = False
-                return check
-        if (year1 == year2):
-                if(month1 > month2): 
-                        check = False
-                        return check
-                if(month1 == month2):
-                        if(day1 > day2):
-                                check = False
-                                return check
-                        if(day1 == day2):
-                                if (hour1 > hour2):
-                                        check = False
-                                        return check
-                                if (hour1 == hour2):
-                                        if(min1 >= min2):
-                                                check = False
-                                                return check
-                                
-        return check
-                        
+        date_start = datetime.strptime(start, "%d%m%Y%H%M")
+        date_end = datetime.strptime(end, "%d%m%Y%H%M")
+
+        if(date_start < date_end): return check
+        else:
+                 check = False
+                 return check
+    
     def closeEvent(self, event):
         
         reply = QMessageBox.question(self, 'Message',
