@@ -168,23 +168,35 @@ class BrowseWindow(QWidget):
         self.setGeometry(300, 300, 450, 200)
         self.setWindowTitle('Browse')
         self.setFixedSize(self.size())
-        files = str(QFileDialog.getExistingDirectory())
+        self.path = str(QFileDialog.getExistingDirectory())
         
-        self.lbl0 = QLabel("Current Path: "+ files, self)
-        self.lbl0.move(10, 20)   
+        self.lbl0 = QLabel("Current Path: "+ self.path, self)
+        self.lbl0.move(50, 20)   
 
 
-        f = open("config/browse.txt", "w")
-        f.write(files)
-        f.close()
+        self.lbl1 = QLabel("Save current path?", self)
+        self.lbl1.move(160, 70)
+
+
+        
 
         OK = QPushButton('OK', self)
         OK.resize(150, 50)
         OK.move(50, 110)
         OK.clicked.connect(self.okButton)
 
+        Cancel = QPushButton('Cancel', self)
+        Cancel.resize(150, 50)
+        Cancel.move (250, 110)
+        Cancel.clicked.connect(self.cancelButton)
+        
+    def cancelButton(self):
+        self.close()
         
     def okButton(self):
+        f = open("config/browse.txt", "w")
+        f.write(self.path)
+        f.close()
         self.close()     
 
 class CalcWindow(QWidget):
@@ -241,7 +253,7 @@ class MainWindow(QMainWindow):
         BrowseAct.setShortcut('Ctrl+B')
         BrowseAct.triggered.connect(self.browse)
         
-        self.toolbar = self.addToolBar('Camera')
+        self.toolbar = self.addToolBar('Field of View')
         self.toolbar.addAction(CameraAct)
        
         self.toolbar = self.addToolBar('Browse')
@@ -352,11 +364,11 @@ class MainWindow(QMainWindow):
 
     def calculateButton(self):
         if self.checkHM() == False:
-                error = "Hours must have values between 0-24.\nMinutes must have values between 0-60."
+                error = "Hours must have values between 1-24.\nMinutes must have values between 1-60."
                 QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
         else:
                 if self.checkYMD() == False:
-                        error = "Start date must me older than End date."
+                        error = "Start date must be older than End date."
                         QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
                 else:
                         #print (10 + int(self.y1.currentText())) 
@@ -407,15 +419,27 @@ class MainWindow(QMainWindow):
 
         m1 = self.min1.text()
         m2 = self.min2.text()
+        hours = []
+        for i in range(1, 25):
+                hours.append(str(i))
         
-        if(self.is_number(h1) == False) or (self.is_number(h2) == False) or (self.is_number(m1) == False) (self.is_number(m2) == False):
-                
+        mins = []
+        for i in range(1, 61):
+                mins.append(str(i))
+ 
+        if (h1 in hours) and (h2 in hours):
+                check = True
+        else:
                 check = False
                 return check
-        if(int(h1) < 0 and int(h1) > 24) or (int(h2) < 0 and int(h2) > 24) or (int(m1) < 0 and int(m1) > 60) or (int(m2) < 0 and int(m2) > 60):
+
+        if (m1 in mins) and (m2 in mins):
+                check = True
+        else:
                 check = False
                 return check
-        return check
+      
+       
         
     def checkYMD(self):
         check = True
@@ -429,11 +453,13 @@ class MainWindow(QMainWindow):
         day1 = int(self.d1.currentText())
         day2 = int(self.d2.currentText())
 
-        hour1 = int(self.hour1.text())
-        hour2 = int(self.hour2.text())
+        hour1 = self.hour1.text()
+        hour2 = self.hour2.text()
 
-        min1 = int(self.min1.text())
-        min1 = int(self.min2.text())
+        min1 = self.min1.text()
+        min1 = self.min2.text()
+
+        
         
         if (year1 > year2):
                 check = False
