@@ -346,6 +346,9 @@ class MainWindow(QMainWindow):
         if self.checkHM() == False:
                 error = "Hours must have values between 0-23.\nMinutes must have values between 0-59."
                 QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
+        if self.checkInterval() == False:
+                error = "Interval must be a number."
+                QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
         else:
                 if self.checkYMD() == False:
                         error = "Start date must be older than End date."
@@ -456,7 +459,10 @@ class MainWindow(QMainWindow):
         else:
                  check = False
                  return check
-    
+
+    def checkInterval(self):
+        return self.is_number(self.interval.text())
+
     def closeEvent(self, event):
         
         reply = QMessageBox.question(self, 'Message',
