@@ -229,14 +229,20 @@ class MainWindow(QMainWindow):
         self.lbl1 = QLabel("Start Time:", self)
         self.lbl1.move(70, 40)
         self.d1 = QComboBox(self)
-        for day in range (1, 32):      
-                self.d1.addItem(str(day))
+        for day in range (1, 32):
+                if day < 10:    
+                        date = "0" + str(day)
+                else: date = str(day)  
+                self.d1.addItem(str(date))
         self.d1.resize(50, 30)        
         self.d1.move(20, 70)
 
         self.m1 = QComboBox(self)
-        for month in range (1, 13):      
-                self.m1.addItem(str(month))
+        for month in range (1, 13):   
+                if month < 10:
+                        date = "0" + str(month)
+                else: date = str(month)   
+                self.m1.addItem(date)
         self.m1.resize(50, 30)        
         self.m1.move(70, 70)
 
@@ -266,13 +272,19 @@ class MainWindow(QMainWindow):
         self.lbl4.move(70, 120)
         self.d2 = QComboBox(self)
         for day in range (1, 32):      
-                self.d2.addItem(str(day))
+                if day < 10:    
+                        date = "0" + str(day)
+                else: date = str(day)  
+                self.d2.addItem(str(date))
         self.d2.resize(50, 30)        
         self.d2.move(20, 70+move_down)
 
         self.m2 = QComboBox(self)
-        for month in range (1, 13):      
-                self.m2.addItem(str(month))
+        for month in range (1, 13):
+                if month < 10:
+                        date = "0" + str(month)
+                else: date = str(month)                       
+                self.m2.addItem(date)
         self.m2.resize(50, 30)        
         self.m2.move(70, 70+move_down)
 
