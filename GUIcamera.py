@@ -227,7 +227,7 @@ class CalcWindow(QWidget):
 
         self.end = open("config/end.txt", "r").read().splitlines()
     
-    #def BanjoRadiSvojaSranja()    
+       
                 
     
     def okButton(self):
@@ -376,7 +376,9 @@ class MainWindow(QMainWindow):
 
                         self.storeDates()
                         self.makeCSV()
-                        self.C = CalcWindow()
+                        #def BanjoRadiSvojaSranja() 
+                        #self.C = CalcWindow()
+                        QMessageBox.warning(self, "Success!", "Success!", QMessageBox.Cancel)
                         self.C.show()
                         
     def storeDates(self):
@@ -419,6 +421,7 @@ class MainWindow(QMainWindow):
 
         m1 = self.min1.text()
         m2 = self.min2.text()
+
         hours = []
         for i in range(1, 25):
                 hours.append(str(i))
@@ -457,7 +460,7 @@ class MainWindow(QMainWindow):
         hour2 = self.hour2.text()
 
         min1 = self.min1.text()
-        min1 = self.min2.text()
+        min2 = self.min2.text()
 
         
         
@@ -469,9 +472,18 @@ class MainWindow(QMainWindow):
                         check = False
                         return check
                 if(month1 == month2):
-                        if(day1 >= day2):
+                        if(day1 > day2):
                                 check = False
                                 return check
+                        if(day1 == day2):
+                                if (hour1 > hour2):
+                                        check = False
+                                        return check
+                                if (hour1 == hour2):
+                                        if(min1 >= min2):
+                                                check = False
+                                                return check
+                                
         return check
                         
 #vratiti sranje iz todo.py ovde
