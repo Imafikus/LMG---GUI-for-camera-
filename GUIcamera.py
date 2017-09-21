@@ -118,45 +118,33 @@ class CameraWindow(QWidget):
         return (self.checkWoV() and self.checkAz() and self.checkH() and self.checkRot())        
         
     def checkWoV(self):
-        check = True
-        if self.is_number(self.WoV)==False:
-                check = False
-                #return check
-        if float(self.WoV) < 0 or float(self.WoV) > 180:
-                check = False                
-                return check
-        return check    
-
+        check = []
+        for i in range (0, 361):
+                check.append(str(i))
+        if self.WoV in check: return True
+        else: return False
+                
     def checkAz(self):
-        check = True
-        if self.is_number(self.Az)==False:
-                check = False
-                return check
-        if float(self.Az) < 0 or float(self.Az) > 360:
-                check = False                
-                return check
-        return check
-
+        check = []
+        for i in range (0, 181):
+                check.append(str(i))
+        if self.Az in check: return True
+        else: return False
+    
     def checkH(self):
-        check = True
-        if self.is_number(self.H)==False:
-                check = False
-                return check
-        if float(self.H) < 0 or float(self.H) > 90:
-                check = False                
-                return check
-        return check
-
+        check = []
+        for i in range (0, 91):
+                check.append(str(i))
+        if self.H in check: return True
+        else: return False
+    
     def checkRot(self):
-        check = True
-        if self.is_number(self.Rot)==False:
-                check = False
-                return check
-        if float(self.Rot) < 0 or float(self.Rot) > 90:
-                check = False                
-                return check
-        return check
-
+        check = []
+        for i in range (0, 91):
+                check.append(str(i))
+        if self.Rot in check: return True
+        else: return False
+    
 class BrowseWindow(QWidget):
     
     def __init__(self):
@@ -199,40 +187,7 @@ class BrowseWindow(QWidget):
         f.close()
         self.close()     
 
-class CalcWindow(QWidget):
-    
-    def __init__(self):
-        super().__init__()
-        
-        self.initUI()
 
-    def initUI(self):
-        self.setGeometry(300, 300, 450, 200)
-        self.setWindowTitle('Table')
-        self.setFixedSize(self.size())
-
-        
-        OK = QPushButton('OK', self)
-        OK.resize(150, 50)
-        OK.move(50, 110)
-        OK.clicked.connect(self.okButton)
-
-
-        self.camera = open("config/camera.txt", "r").read().splitlines()
-        
-        self.browse = open("config/browse.txt", "r").read().splitlines()        
-        self.save = open("config/save.txt", "r").read().splitlines()
-
-        self.begin = open("config/begin.txt", "r").read().splitlines()
-
-        self.end = open("config/end.txt", "r").read().splitlines()
-    
-       
-                
-    
-    def okButton(self):
-        self.close()     
-       
 class MainWindow(QMainWindow):
     
     def __init__(self):
@@ -371,15 +326,13 @@ class MainWindow(QMainWindow):
                         error = "Start date must be older than End date."
                         QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
                 else:
-                        #print (10 + int(self.y1.currentText())) 
+                       
                         self.Banjo = (["2017-02-03 19:35:39", "11%"], ["2017-02-03 19:38:39", "21%"], ["2017-02-03 19:41:39", "39%"], ["2017-02-03 19:44:39", "56%"])
 
                         self.storeDates()
                         self.makeCSV()
                         #def BanjoRadiSvojaSranja() 
-                        #self.C = CalcWindow()
-                        QMessageBox.warning(self, "Success!", "Success!", QMessageBox.Cancel)
-                        self.C.show()
+                        QMessageBox.information(self, "Success!", "Success!", QMessageBox.Ok)
                         
     def storeDates(self):
 
@@ -422,12 +375,15 @@ class MainWindow(QMainWindow):
         m1 = self.min1.text()
         m2 = self.min2.text()
 
+        if (m1 == "00"): m1 = "0"
+        if (m2 == "00"): m2 = "0"
+
         hours = []
         for i in range(1, 25):
                 hours.append(str(i))
         
         mins = []
-        for i in range(1, 61):
+        for i in range(0, 61):
                 mins.append(str(i))
  
         if (h1 in hours) and (h2 in hours):
@@ -486,7 +442,17 @@ class MainWindow(QMainWindow):
                                 
         return check
                         
-#vratiti sranje iz todo.py ovde
+    def closeEvent(self, event):
+        
+        reply = QMessageBox.question(self, 'Message',
+            "Are you sure to quit?", QMessageBox.Yes | 
+            QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore() 
+     
     def center(self):
 
         qr = self.frameGeometry()
