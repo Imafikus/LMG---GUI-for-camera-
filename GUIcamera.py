@@ -217,7 +217,7 @@ class MainWindow(QMainWindow):
 
         #window init
         self.width = 340
-        self.height = 350        
+        self.height = 400     
         self.setGeometry(300, 300, self.width, self.height)
         self.setFixedSize(self.size())
         self.setWindowTitle('PMG camera')
@@ -307,6 +307,18 @@ class MainWindow(QMainWindow):
         self.min2 = QLineEdit(self)
         self.min2.resize(30,30)
         self.min2.move(290, 70+move_down)
+        
+        #Interval init
+
+        self.lbl6 = QLabel("Interval:", self)
+        self.lbl6.move(20, 240)
+        self.interval = QLineEdit(self)
+        self.interval.resize(40, 30)
+        self.interval.move(80, 240)
+        self.lbl6 = QLabel("Mins.", self)
+        self.lbl6.move(82, 210)
+        init = open("config/interval.txt", "r").read().splitlines()
+        self.interval.setText(init[0])
         
         
         #Button init
