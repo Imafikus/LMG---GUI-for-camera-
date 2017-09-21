@@ -320,7 +320,12 @@ class MainWindow(QMainWindow):
         init = open("config/interval.txt", "r").read().splitlines()
         self.interval.setText(init[0])
         
-        
+        #Checkbox init
+        self.show_image = QCheckBox('Show image', self)
+        self.show_image.move(220, 240)
+        self.show_image.toggle()
+        self.show_image.stateChanged.connect(self.showImage)        
+
         #Button init
 
         calc = QPushButton('Calculate', self)
@@ -339,7 +344,11 @@ class MainWindow(QMainWindow):
         self.B = BrowseWindow()
         self.B.show()
     
-    
+    def showImage(self, state):
+        if state == Qt.Checked:
+            print("vidi se slika")
+        else:
+            print("ne vidi se slika")
         
 
     def calculateButton(self):
@@ -357,6 +366,7 @@ class MainWindow(QMainWindow):
                        
                         self.Banjo = (["2017-02-03 19:35:39", "11%"], ["2017-02-03 19:38:39", "21%"], ["2017-02-03 19:41:39", "39%"], ["2017-02-03 19:44:39", "56%"])
 
+                        self.storeInterval()
                         self.storeDates()
                         self.makeCSV()
                         #def BanjoRadiSvojaSranja() 
@@ -405,6 +415,9 @@ class MainWindow(QMainWindow):
 
         if (m1 == "00"): m1 = "0"
         if (m2 == "00"): m2 = "0"
+
+        if(len(m1) == 2) and(m1[0] == "0"): m1 = m1[1]
+        if(len(m2) == 2) and(m2[0] == "0"): m2 = m2[1]
 
         hours = []
         for i in range(0, 24):
@@ -462,6 +475,11 @@ class MainWindow(QMainWindow):
 
     def checkInterval(self):
         return self.is_number(self.interval.text())
+
+    def storeInterval(self):
+        f = open("config/interval.txt", "w")
+        f.write(self.interval.text())
+        f.close
 
     def closeEvent(self, event):
         
