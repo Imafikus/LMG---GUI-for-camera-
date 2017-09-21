@@ -321,7 +321,7 @@ class MainWindow(QMainWindow):
         self.interval.setText(init[0])
         
         #Checkbox init
-        self.show_image = QCheckBox('Show image', self)
+        self.show_image = QCheckBox('Show images', self)
         self.show_image.move(220, 240)
         self.show_image.toggle()
         self.show_image.stateChanged.connect(self.showImage)        
@@ -484,8 +484,8 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event):
         
         reply = QMessageBox.question(self, 'Message',
-            "Are you sure to quit?", QMessageBox.Yes | 
-            QMessageBox.No, QMessageBox.No)
+            "Are you sure to quit?", QMessageBox.No | 
+            QMessageBox.Yes, QMessageBox.Yes)
 
         if reply == QMessageBox.Yes:
             event.accept()
