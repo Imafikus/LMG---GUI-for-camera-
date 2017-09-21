@@ -319,7 +319,7 @@ class MainWindow(QMainWindow):
 
     def calculateButton(self):
         if self.checkHM() == False:
-                error = "Hours must have values between 1-24.\nMinutes must have values between 1-60."
+                error = "Hours must have values between 0-23.\nMinutes must have values between 0-59."
                 QMessageBox.warning(self, "Input error", error, QMessageBox.Cancel)
         else:
                 if self.checkYMD() == False:
@@ -332,7 +332,7 @@ class MainWindow(QMainWindow):
                         self.storeDates()
                         self.makeCSV()
                         #def BanjoRadiSvojaSranja() 
-                        QMessageBox.information(self, "Success!", "Success!", QMessageBox.Ok)
+                        QMessageBox.information(self, "Success!", "Estimation was successful!", QMessageBox.Ok)
                         
     def storeDates(self):
 
@@ -379,11 +379,11 @@ class MainWindow(QMainWindow):
         if (m2 == "00"): m2 = "0"
 
         hours = []
-        for i in range(1, 25):
+        for i in range(0, 24):
                 hours.append(str(i))
         
         mins = []
-        for i in range(0, 61):
+        for i in range(0, 60):
                 mins.append(str(i))
  
         if (h1 in hours) and (h2 in hours):
