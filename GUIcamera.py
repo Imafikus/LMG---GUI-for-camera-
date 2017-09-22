@@ -423,6 +423,9 @@ class MainWindow(QMainWindow):
         if (m1 == "00"): m1 = "0"
         if (m2 == "00"): m2 = "0"
 
+        if (h1 == "00"): h1 = "0"
+        if (h2 == "00"): h2 = "0"
+
         if(len(m1) == 2) and(m1[0] == "0"): m1 = m1[1]
         if(len(m2) == 2) and(m2[0] == "0"): m2 = m2[1]
 
