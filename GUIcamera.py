@@ -46,7 +46,7 @@ class CameraWindow(QWidget):
         self.p2.setText(self.values[1])
 
         
-        self.lbl5 = QLabel("H.", self)
+        self.lbl5 = QLabel("Ev.", self)
         self.lbl5.move(200, 95)
 
         self.p3 = QLineEdit(self)
@@ -370,6 +370,23 @@ class MainWindow(QMainWindow):
                         self.storeDates()
                         self.makeCSV()
                         #def BanjoRadiSvojaSranja() 
+                        camera = open("config/camera.txt", "r").read().splitlines()
+                        WoV = int(camera[0])
+                        azimuth = int(camera[1])
+                        height = int(camera[2])
+                        rotation = int(camera[3])
+                        
+                        f = open("config/begin.txt", "r").read().splitlines()
+                        begin = f[0]
+                        f = open("config/end.txt", "r").read().splitlines()
+                        end = f[0]
+
+                        f = open("config/interval.txt", "r").read().splitlines()
+			interval = f[0]
+
+                        f = open("config/browse.txt", "r").read().splitlines()
+                        browse  = f[0]
+
                         QMessageBox.information(self, "Success!", "Estimation was successful!", QMessageBox.Ok)
                         
     def storeDates(self):
