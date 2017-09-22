@@ -259,12 +259,15 @@ class MainWindow(QMainWindow):
         self.hour1 = QLineEdit(self)
         self.hour1.move(250, 70)
         self.hour1.resize(30,30)
+        self.hour1.setText("00")
 
         self.lbl3 = QLabel("Mins.", self)
         self.lbl3.move(290, 40)
         self.min1 = QLineEdit(self)
         self.min1.move(290, 70)
         self.min1.resize(30,30)
+        self.min1.setText("00")
+        
         
         #date 2 input init
         move_down = 80
@@ -301,13 +304,14 @@ class MainWindow(QMainWindow):
         self.hour2 = QLineEdit(self)
         self.hour2.resize(30,30)
         self.hour2.move(250, 70+move_down)
+        self.hour2.setText("00")
         
         self.lbl5 = QLabel("Mins.", self)
         self.lbl5.move(290, 120)
         self.min2 = QLineEdit(self)
         self.min2.resize(30,30)
         self.min2.move(290, 70+move_down)
-        
+        self.min2.setText("00")
         #Interval init
 
         self.lbl6 = QLabel("Interval:", self)
@@ -346,9 +350,9 @@ class MainWindow(QMainWindow):
     
     def showImage(self, state):
         if state == Qt.Checked:
-            print("vidi se slika")
+            self.show_config = True
         else:
-            print("ne vidi se slika")
+            self.show_config = False
         
 
     def calculateButton(self):
@@ -370,32 +374,9 @@ class MainWindow(QMainWindow):
                         self.storeDates()
                         self.makeCSV()
                         #def BanjoRadiSvojaSranja() 
-                        camera = open("config/camera.txt", "r").read().splitlines()
-                        WoV = int(camera[0])
-                        azimuth = int(camera[1])
-                        height = int(camera[2])
-                        rotation = int(camera[3])
                         
-                        f = open("config/begin.txt", "r").read().splitlines()
-                        begin = f[0]
-                        f = open("config/end.txt", "r").read().splitlines()
-                        end = f[0]
+                        #use WoV, azimuth, height, rotation, begin, end, interval, show and browse with prefix self. and sifux _config 
 
-                        f = open("config/interval.txt", "r").read().splitlines()
-                        interval = int(f[0])
-
-                        f = open("config/browse.txt", "r").read().splitlines()
-                        browse  = f[0]
-                        """
-                        print(WoV)
-                        print(azimuth)
-                        print(height)
-                        print(rotation)
-                        print(begin)
-                        print(end)
-                        print(interval)
-                        print(browse)
-                        """
                         QMessageBox.information(self, "Success!", "Estimation was successful!", QMessageBox.Ok)
                         
     def storeDates(self):
@@ -498,7 +479,30 @@ class MainWindow(QMainWindow):
         else:
                  check = False
                  return check
+    
+    def readConfig(self):
+        camera = open("config/camera.txt", "r").read().splitlines()
+        self.WoV_config = int(camera[0])
+        self.azimuth_config = int(camera[1])
+        self.height_config = int(camera[2])
+        self.rotation_config = int(camera[3])
+        
+        f = open("config/begin.txt", "r").read().splitlines()
+        begin = f[0]
+        self.begin_config = datetime.strptime(begin, "%d%m%Y%H%M")
+        
+        f = open("config/end.txt", "r").read().splitlines()
+        end = f[0]
+        self.end_config = datetime.strptime(end, "%d%m%Y%H%M")
 
+        f = open("config/interval.txt", "r").read().splitlines()
+        self.interval_config = int(f[0])
+
+        f = open("config/browse.txt", "r").read().splitlines()
+        self.browse_config  = f[0]
+
+            
+    
     def checkInterval(self):
         return self.is_number(self.interval.text())
 
