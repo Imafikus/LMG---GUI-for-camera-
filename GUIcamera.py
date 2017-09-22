@@ -382,11 +382,20 @@ class MainWindow(QMainWindow):
                         end = f[0]
 
                         f = open("config/interval.txt", "r").read().splitlines()
-			interval = f[0]
+                        interval = int(f[0])
 
                         f = open("config/browse.txt", "r").read().splitlines()
                         browse  = f[0]
-
+                        """
+                        print(WoV)
+                        print(azimuth)
+                        print(height)
+                        print(rotation)
+                        print(begin)
+                        print(end)
+                        print(interval)
+                        print(browse)
+                        """
                         QMessageBox.information(self, "Success!", "Estimation was successful!", QMessageBox.Ok)
                         
     def storeDates(self):
